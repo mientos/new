@@ -11,19 +11,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultDiv = document.getElementById('result');
     const storyTitleEl = document.getElementById('storyTitle');
     const storyContentEl = document.getElementById('storyContent');
-
-    // NOWE ELEMENTY - SEKCJA I PRZYCISK AUDIO
     const audioSection = document.getElementById('audio-section');
     const readAloudBtn = document.getElementById('readAloudBtn');
 
-    // Zmienna do przechowywania pełnego tekstu bajki dla lektora
-    let currentStoryText = '';
+    // Zmienne do zarządzania stanem audio
+    let currentAudioPlayer = null;
+    let currentAudioBase64 = null;
+
+    const stopCurrentAudio = () => {
+        if (currentAudioPlayer) {
+            currentAudioPlayer.pause();
+            currentAudioPlayer = null;
+        }
+        readAloudBtn.textContent = "Odsłuchaj Bajkę! 🎧";
+        readAloudBtn.disabled = false;
+    };
 
     const handleGenerateClick = async () => {
-        // Zatrzymujemy ewentualne odtwarzanie poprzedniej bajki
-        if (window.speechSynthesis.speaking) {
-            window.speechSynthesis.cancel();
-        }
+        stopCurrentAudio(); // Zatrzymaj poprzednią bajkę, jeśli grała
 
         const childName = document.getElementById('childName').value.trim();
         const animalHelper = document.getElementById('animalHelper').value.trim();
@@ -36,17 +41,15 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         resultDiv.classList.add('hidden');
-        audioSection.classList.add('hidden'); // Ukrywamy przycisk audio
+        audioSection.classList.add('hidden');
         loadingDiv.classList.remove('hidden');
         generateBtn.disabled = true;
-        generateBtn.textContent = "Tworzę magię...";
+        generateBtn.textContent = "Tworzę magię i dźwięk...";
 
         try {
             const payload = { childName, animalHelper, magicPlace, magicItem };
             const response = await fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'cors',
-                cache: 'no-cache',
+                method: 'POST', mode: 'cors', cache: 'no-cache',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
             });
@@ -59,65 +62,65 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             if (data.error) throw new Error(data.error);
 
-            // Zapisujemy cały tekst bajki (razem z tytułem) do zmiennej
-            currentStoryText = data.story.replace(/[\*#]/g, ''); // Usuwamy znaki formatowania markdown
-
+            // Wyświetlanie tekstu bajki
             const storyParts = data.story.split('\n');
             const title = storyParts.shift().replace(/[\*#]/g, '');
             const content = storyParts.join('<br>');
-
             storyTitleEl.textContent = title;
             storyContentEl.innerHTML = content;
             resultDiv.classList.remove('hidden');
 
-            // Pokazujemy sekcję z przyciskiem do odsłuchania
-            if (currentStoryText && 'speechSynthesis' in window) {
+            // Zapisujemy otrzymany dźwięk i pokazujemy przycisk
+            if (data.audioBase64) {
+                currentAudioBase64 = data.audioBase64;
                 audioSection.classList.remove('hidden');
-                readAloudBtn.textContent = "Odsłuchaj Bajkę! 🎧"; // Resetujemy tekst przycisku
+                stopCurrentAudio(); // Upewnij się, że przycisk ma poprawny tekst
             }
 
         } catch (error) {
             console.error('Błąd:', error);
-            alert(`Wystąpił błąd: ${error.message}`);
+            alert(`Wystąpił błąd podczas generowania: ${error.message}`);
         } finally {
             loadingDiv.classList.add('hidden');
             generateBtn.disabled = false;
             generateBtn.textContent = "Stwórz kolejną bajkę!";
         }
     };
-    
-    // NOWA FUNKCJA DO OBSŁUGI CZYTANIA NA GŁOS
+
     const handleReadAloudClick = () => {
-        if (!currentStoryText || !('speechSynthesis' in window)) {
-            alert("Twoja przeglądarka nie obsługuje odczytywania tekstu na głos.");
+        if (currentAudioPlayer && !currentAudioPlayer.paused) {
+            stopCurrentAudio();
             return;
         }
 
-        // Jeśli lektor właśnie mówi, zatrzymujemy go
-        if (window.speechSynthesis.speaking) {
-            window.speechSynthesis.cancel();
-            readAloudBtn.textContent = "Odsłuchaj Bajkę! 🎧";
+        if (!currentAudioBase64) {
+            alert("Brak danych audio do odtworzenia.");
             return;
         }
 
-        // Tworzymy nową wypowiedź
-        const utterance = new SpeechSynthesisUtterance(currentStoryText);
-        utterance.lang = 'pl-PL'; // Ustawiamy język polski - kluczowe dla poprawnej wymowy!
-        utterance.rate = 0.95; // Można delikatnie zwolnić tempo czytania
-        utterance.pitch = 1.1; // Można lekko podnieść ton głosu
+        // Tworzymy źródło audio z danych base64
+        const audioSrc = `data:audio/mp3;base64,${currentAudioBase64}`;
+        currentAudioPlayer = new Audio(audioSrc);
+        
+        // Zmieniamy przycisk i odtwarzamy
+        readAloudBtn.textContent = "Odtwarzam... ⏹️";
+        readAloudBtn.disabled = true; // Zablokuj na chwilę, by uniknąć podwójnego kliknięcia
 
-        // Gdy czytanie się zakończy, zresetuj tekst przycisku
-        utterance.onend = () => {
-            readAloudBtn.textContent = "Odsłuchaj Bajkę! 🎧";
-        };
+        currentAudioPlayer.play().then(() => {
+            readAloudBtn.disabled = false; // Odblokuj po rozpoczęciu odtwarzania
+        }).catch(error => {
+            console.error("Błąd odtwarzania audio:", error);
+            alert("Nie udało się odtworzyć audio.");
+            stopCurrentAudio();
+        });
 
-        // Zmieniamy tekst przycisku i uruchamiamy czytanie
-        readAloudBtn.textContent = "Zatrzymaj czytanie ⏹️";
-        window.speechSynthesis.speak(utterance);
+        // Gdy audio się skończy, zresetuj stan
+        currentAudioPlayer.addEventListener('ended', () => {
+            stopCurrentAudio();
+        });
     };
 
     const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
-    
     const randomAnimalBtn = document.getElementById('randomAnimalBtn');
     const randomPlaceBtn = document.getElementById('randomPlaceBtn');
     const randomItemBtn = document.getElementById('randomItemBtn');
@@ -127,7 +130,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (randomItemBtn) randomItemBtn.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('magicItem').value = getRandomElement(randomItems); });
 
     if (generateBtn) generateBtn.addEventListener('click', handleGenerateClick);
-    
-    // Dodajemy nasłuchiwanie na przycisk odczytywania
     if (readAloudBtn) readAloudBtn.addEventListener('click', handleReadAloudClick);
 });
