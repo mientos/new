@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- ZMIANA: Dodajemy "kurtynę" - ekran powitalny -->
     <div id="entry-overlay">
         <div class="entry-content">
             <svg class="entry-icon"><use xlink:href="#icon-sparkle"></use></svg>
@@ -35,12 +34,10 @@
         </defs>
     </svg>
 
-    <audio id="backgroundMusicPlayer" loop>
-        <source src="https://cdn.pixabay.com/download/audio/2024/09/22/audio_6a4d382fe6.mp3" type="audio/mpeg">
-    </audio>
+    <!-- ZMIANA: Element audio jest teraz pusty, źródło ustawi JavaScript -->
+    <audio id="backgroundMusicPlayer" loop></audio>
 
     <div class="container">
-        <!-- Reszta kodu HTML pozostaje bez zmian -->
         <header>
             <h1>
                 <svg class="header-icon"><use xlink:href="#icon-sparkle"></use></svg>
