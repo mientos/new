@@ -257,18 +257,18 @@ button#generateBtn:disabled {
     height: 24px;
 }
 
-input[type="range"]#voiceVolume {
+/* ZMIANA: Uniwersalna klasa dla obu suwaków głośności */
+.volume-slider {
     -webkit-appearance: none;
     appearance: none;
-    width: 150px;
-    height: 6px;
     background: linear-gradient(90deg, var(--accent-starlight) 0%, var(--bg-deep-space) 100%);
     border-radius: 10px;
     outline: none;
     transition: opacity 0.3s var(--transition-curve);
     cursor: pointer;
+    height: 6px;
 }
-input[type="range"]#voiceVolume::-webkit-slider-thumb {
+.volume-slider::-webkit-slider-thumb {
     -webkit-appearance: none; appearance: none;
     width: 20px; height: 20px;
     background: var(--text-primary);
@@ -278,10 +278,15 @@ input[type="range"]#voiceVolume::-webkit-slider-thumb {
     cursor: pointer;
     transition: all 0.3s var(--transition-curve);
 }
-input[type="range"]#voiceVolume::-webkit-slider-thumb:hover {
+.volume-slider::-webkit-slider-thumb:hover {
     background: var(--accent-starlight);
     box-shadow: 0 0 10px var(--accent-starlight);
 }
+
+/* Dostosowanie szerokości dla konkretnych suwaków */
+#voiceVolume { width: 150px; }
+#musicVolume { width: 100px; }
+
 
 footer {
     margin-top: 2.5rem;
@@ -293,6 +298,13 @@ footer {
     align-items: center;
     padding-top: 1.5rem;
     border-top: 1px solid var(--border-color);
+}
+
+/* ZMIANA: Style dla grupy kontrolek muzyki */
+#music-control-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
 
 #toggleMusicBtn {
