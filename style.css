@@ -1,3 +1,4 @@
+/* ... cała góra pliku bez zmian ... */
 :root {
     --bg-deep-space: #0f172a; /* Ciemniejszy, głębszy granat */
     --bg-card: #1e293b;
@@ -21,7 +22,6 @@
     padding: 0;
 }
 
-/* ZMIANA: Magiczne, animowane tło */
 body {
     font-family: var(--font-sans);
     background-color: var(--bg-deep-space);
@@ -31,7 +31,7 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 2rem;
-    overflow: hidden; /* Zapobiega pojawianiu się pasków przewijania od tła */
+    overflow: hidden; 
     position: relative;
 }
 
@@ -51,7 +51,7 @@ body::before {
 }
 
 .container {
-    background: linear-gradient(145deg, var(--bg-card), #172131); /* Subtelny gradient */
+    background: linear-gradient(145deg, var(--bg-card), #172131);
     padding: 2.5rem 3rem;
     border-radius: var(--border-radius);
     max-width: 600px;
@@ -68,7 +68,6 @@ header h1 {
     color: var(--text-primary);
     font-size: 2.25rem;
     margin-bottom: 0.5rem;
-    /* ZMIANA: Ustawienie dla ikony w tytule */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -199,7 +198,7 @@ button#generateBtn:disabled {
     text-align: left;
     line-height: 1.8;
     color: var(--text-secondary);
-    font-size: 1.05rem; /* ZMIANA: Lepsza czytelność */
+    font-size: 1.05rem;
 }
 
 #storyTitle {
@@ -259,7 +258,6 @@ button#generateBtn:disabled {
     height: 24px;
 }
 
-/* ZMIANA: Całkowicie nowy, magiczny styl suwaka głośności */
 input[type="range"]#voiceVolume {
     -webkit-appearance: none;
     appearance: none;
@@ -286,11 +284,48 @@ input[type="range"]#voiceVolume::-webkit-slider-thumb:hover {
     box-shadow: 0 0 10px var(--accent-starlight);
 }
 
+/* ZMIANA: Style dla stopki i nowego przycisku */
 footer {
     margin-top: 2.5rem;
     font-size: 0.8rem;
     color: var(--text-muted);
-    opacity: 0.6;
+    opacity: 0.8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+#toggleMusicBtn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s var(--transition-curve);
+}
+
+#toggleMusicBtn:hover {
+    color: var(--text-secondary);
+    border-color: var(--text-muted);
+    transform: scale(1.1);
+}
+
+#toggleMusicBtn.is-playing {
+    color: var(--accent-starlight);
+    border-color: var(--accent-starlight);
+    box-shadow: 0 0 10px rgba(253, 224, 71, 0.2);
+}
+
+#toggleMusicBtn svg {
+    width: 20px;
+    height: 20px;
 }
 
 /* Spinner bez zmian, jest OK */
