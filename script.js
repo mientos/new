@@ -24,10 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentAudioBase64 = null;
     let fadeInterval = null;
     
-    // Zmienna śledząca aktualny stan widoku
     let isStoryVisible = false;
 
-    const fadeAudio = (player, targetVolume, duration = 1000) => {
+    const fadeAudio = (player, targetVolume, duration = 800) => {
         clearInterval(fadeInterval);
         player.play().catch(e => {}); 
         const startVolume = player.volume;
@@ -40,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if ((volumeStep > 0 && newVolume >= targetVolume) || (volumeStep < 0 && newVolume <= targetVolume)) {
                 newVolume = targetVolume;
                 clearInterval(fadeInterval);
-                if (newVolume === 0 && player.id === 'musicPlayer') {
+                if (newVolume === 0) {
                     player.pause();
                 }
             }
@@ -78,13 +77,11 @@ document.addEventListener('DOMContentLoaded', () => {
         storyContainer.classList.add('hidden');
         formSection.style.display = 'block';
         
-        // Czyścimy pola formularza dla nowej historii
         document.getElementById('childName').value = '';
         document.getElementById('animalHelper').value = '';
         document.getElementById('magicPlace').value = '';
         document.getElementById('magicItem').value = '';
         
-        // Resetujemy tekst głównego przycisku
         btnText.textContent = 'Stwórz Moją Bajkę';
         btnText.classList.remove('hidden');
     };
@@ -128,7 +125,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 formSection.style.display = 'none';
                 storyContainer.classList.remove('hidden');
                 
-                // Aktualizujemy stan i tekst przycisku po sukcesie
                 isStoryVisible = true;
                 btnText.textContent = 'Stwórz Nową Opowieść';
             }
@@ -156,6 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         voicePlayer.play().then(() => {
             readAloudBtn.disabled = false;
+            // Tutaj zaczynamy odtwarzanie, więc podgłaśniamy muzykę do wartości z suwaka
             fadeAudio(musicPlayer, parseFloat(musicVolumeSlider.value));
         }).catch(error => {
             console.error("Błąd odtwarzania głosu:", error);
@@ -164,32 +161,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
         voicePlayer.addEventListener('ended', () => stopCurrentAudio(true));
     };
-
+    
+    // === OSTATECZNA, POPRAWIONA LOGIKA SUWAKA GŁOŚNOŚCI ===
     musicVolumeSlider.addEventListener('input', () => {
+        // Zawsze przerywaj automatyzację. Użytkownik ma teraz kontrolę.
         clearInterval(fadeInterval);
+        
         const newVolume = parseFloat(musicVolumeSlider.value);
+        
+        // Zawsze ustawiaj głośność natychmiast, zgodnie z wolą użytkownika.
         musicPlayer.volume = newVolume;
+
+        // Jeśli użytkownik chce głośności, a muzyka jest zapauzowana...
         if (newVolume > 0 && musicPlayer.paused) {
-            if (voicePlayer && !voicePlayer.paused) {
+            // ...włącz ją, ale tylko jeśli jesteśmy w "trybie opowieści".
+            // To zapobiega samotnemu graniu muzyki przed wygenerowaniem bajki.
+            if (isStoryVisible) {
                  musicPlayer.play().catch(e => {});
             }
-        } else if (newVolume === 0) {
-            musicPlayer.pause();
         }
     });
-    
+
     const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
     document.getElementById('randomAnimalBtn').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('animalHelper').value = getRandomElement(randomAnimals); });
     document.getElementById('randomPlaceBtn').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('magicPlace').value = getRandomElement(randomPlaces); });
     document.getElementById('randomItemBtn').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('magicItem').value = getRandomElement(randomItems); });
 
-    // === GŁÓWNA LOGIKA INTELIGENTNEGO PRZYCISKU ===
     generateBtn.addEventListener('click', () => {
         if (isStoryVisible) {
-            // Jeśli historia jest widoczna, wracamy do formularza
             resetToFormView();
         } else {
-            // W przeciwnym razie, generujemy nową bajkę
             executeGeneration();
         }
     });
