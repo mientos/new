@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teatr Bajek AI – Stwórz Personalizowane Bajki na Dobranoc</title>
     <meta name="description" content="Generator bajek AI, w którym stworzysz unikalną, personalizowaną opowieść na dobranoc dla Twojego dziecka. Wpisz imię, wybierz motyw i słuchaj magicznej bajki!">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,11 +53,11 @@
 
         <main>
             <div id="form-section">
-                <div class="form-group">
+                <!-- FORMULARZ BEZ ZMIAN -->
+                 <div class="form-group">
                     <label for="childName">Imię Głównego Bohatera</label>
                     <input type="text" id="childName" placeholder="np. Zosia, Krzyś">
                 </div>
-
                 <div class="form-group">
                     <label for="motivationInput">Główna Motywacja Bohatera</label>
                     <div class="input-with-icon">
@@ -66,7 +67,6 @@
                         </button>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="realmInput">Kraina i jej Nastrój</label>
                     <div class="input-with-icon">
@@ -76,7 +76,6 @@
                         </button>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="guardianInput">Tajemniczy Strażnik i jego Rola</label>
                      <div class="input-with-icon">
@@ -86,7 +85,6 @@
                         </button>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label for="storyStyle">Styl Opowieści</label>
                     <select id="storyStyle">
@@ -97,7 +95,6 @@
                         <option value="brzechwa_tuwim">W stylu Brzechwy/Tuwima</option>
                     </select>
                 </div>
-                
                 <div class="form-group">
                     <label for="storyLength">Długość Opowieści</label>
                     <select id="storyLength">
@@ -106,7 +103,6 @@
                         <option value="dluga">Długa (ok. 5-6 min czytania)</option>
                     </select>
                 </div>
-
                 <div class="form-group">
                     <label for="ageCategory">Dla kogo jest bajka?</label>
                     <select id="ageCategory">
@@ -123,13 +119,20 @@
             </button>
         
             <div id="story-container" class="hidden">
+                <!-- KONTENER NA OBRAZ -->
+                <div id="image-container" class="hidden">
+                    <div class="image-wrapper">
+                        <img id="storyImage1" class="story-image" src="" alt="Ilustracja do bajki">
+                        <img id="storyImage2" class="story-image" src="" alt="Ilustracja do bajki">
+                    </div>
+                </div>
+
                 <div id="result">
                     <h2 id="storyTitle"></h2>
                     <div id="storyContent"></div>
                 </div>
     
                 <div id="audio-section">
-                    <!-- NOWY KONTENER DLA PRZYCISKÓW AKCJI -->
                     <div id="story-actions">
                         <button id="readAloudBtn" class="audio-button">
                             <span class="btn-text">Odsłuchaj Opowieść</span>
