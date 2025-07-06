@@ -15,46 +15,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const readAloudBtn = document.getElementById('readAloudBtn');
     
     const musicPlayer = document.getElementById('musicPlayer');
-    const musicVolumeSlider = document.getElementById('musicVolume');
+    // ZMIANA: Pobieramy nowy suwak do głośności lektora
+    const voiceVolumeSlider = document.getElementById('voiceVolume');
 
     const btnText = generateBtn.querySelector('.btn-text');
     const spinnerContainer = generateBtn.querySelector('.spinner-container');
 
     let voicePlayer = null;
     let currentAudioBase64 = null;
-    let fadeInterval = null;
-    
     let isStoryVisible = false;
 
-    const fadeAudio = (player, targetVolume, duration = 800) => {
-        clearInterval(fadeInterval);
-        player.play().catch(e => {}); 
-        const startVolume = player.volume;
-        const frameDuration = 50;
-        const totalFrames = duration / frameDuration;
-        const volumeStep = (targetVolume - startVolume) / totalFrames;
-
-        fadeInterval = setInterval(() => {
-            let newVolume = player.volume + volumeStep;
-            if ((volumeStep > 0 && newVolume >= targetVolume) || (volumeStep < 0 && newVolume <= targetVolume)) {
-                newVolume = targetVolume;
-                clearInterval(fadeInterval);
-                if (newVolume === 0) {
-                    player.pause();
-                }
-            }
-            player.volume = newVolume;
-        }, frameDuration);
-    };
+    // ZMIANA: Muzyka w tle ma stałą, niską głośność
+    musicPlayer.volume = 0.08;
 
     const stopCurrentAudio = (resetButton = true) => {
         if (voicePlayer) {
             voicePlayer.pause();
             voicePlayer = null;
         }
-        if (!musicPlayer.paused) {
-            fadeAudio(musicPlayer, 0); 
-        }
+        musicPlayer.pause();
+        
         if (resetButton) {
             readAloudBtn.querySelector('.btn-text').textContent = "Odsłuchaj Opowieść";
             readAloudBtn.disabled = false;
@@ -73,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const resetToFormView = () => {
         stopCurrentAudio();
         isStoryVisible = false;
-        
         storyContainer.classList.add('hidden');
         formSection.style.display = 'block';
         
@@ -124,7 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentAudioBase64 = data.audioBase64;
                 formSection.style.display = 'none';
                 storyContainer.classList.remove('hidden');
-                
                 isStoryVisible = true;
                 btnText.textContent = 'Stwórz Nową Opowieść';
             }
@@ -146,14 +124,19 @@ document.addEventListener('DOMContentLoaded', () => {
         const audioSrc = `data:audio/mp3;base64,${currentAudioBase64}`;
         voicePlayer = new Audio(audioSrc);
         
+        // ZMIANA: Ustawiamy głośność lektora zgodnie z wartością suwaka PRZED odtworzeniem
+        voicePlayer.volume = parseFloat(voiceVolumeSlider.value);
+        
         const buttonTextEl = readAloudBtn.querySelector('.btn-text');
         buttonTextEl.textContent = "Słucham...";
         readAloudBtn.disabled = true;
 
         voicePlayer.play().then(() => {
             readAloudBtn.disabled = false;
-            // Tutaj zaczynamy odtwarzanie, więc podgłaśniamy muzykę do wartości z suwaka
-            fadeAudio(musicPlayer, parseFloat(musicVolumeSlider.value));
+            // Odtwórz muzykę w tle, jeśli jej stała głośność jest większa niż 0
+            if (musicPlayer.volume > 0) {
+                musicPlayer.play().catch(e => {});
+            }
         }).catch(error => {
             console.error("Błąd odtwarzania głosu:", error);
             stopCurrentAudio();
@@ -162,23 +145,12 @@ document.addEventListener('DOMContentLoaded', () => {
         voicePlayer.addEventListener('ended', () => stopCurrentAudio(true));
     };
     
-    // === OSTATECZNA, POPRAWIONA LOGIKA SUWAKA GŁOŚNOŚCI ===
-    musicVolumeSlider.addEventListener('input', () => {
-        // Zawsze przerywaj automatyzację. Użytkownik ma teraz kontrolę.
-        clearInterval(fadeInterval);
-        
-        const newVolume = parseFloat(musicVolumeSlider.value);
-        
-        // Zawsze ustawiaj głośność natychmiast, zgodnie z wolą użytkownika.
-        musicPlayer.volume = newVolume;
-
-        // Jeśli użytkownik chce głośności, a muzyka jest zapauzowana...
-        if (newVolume > 0 && musicPlayer.paused) {
-            // ...włącz ją, ale tylko jeśli jesteśmy w "trybie opowieści".
-            // To zapobiega samotnemu graniu muzyki przed wygenerowaniem bajki.
-            if (isStoryVisible) {
-                 musicPlayer.play().catch(e => {});
-            }
+    // === OSTATECZNA, NIEZAWODNA LOGIKA SUWAKA GŁOŚNOŚCI ===
+    voiceVolumeSlider.addEventListener('input', () => {
+        // Jeśli odtwarzacz lektora istnieje (czyli bajka gra lub jest zapauzowana)...
+        if (voicePlayer) {
+            // ...natychmiast zmień jego głośność.
+            voicePlayer.volume = parseFloat(voiceVolumeSlider.value);
         }
     });
 
