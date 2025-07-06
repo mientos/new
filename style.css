@@ -193,10 +193,12 @@ header p {
     font-size: 0.9rem;
 }
 
+/* NOWY STYL DLA KONTENERA Z PRZYCISKIEM WEWNĄTRZ */
 .input-with-icon {
     position: relative;
 }
 
+/* ZMODYFIKOWANE STYLE DLA INPUT I SELECT */
 .form-group input, .form-group select {
     width: 100%;
     padding: 0.9rem 1rem;
@@ -208,6 +210,11 @@ header p {
     font-size: 1rem;
     transition: all 0.3s var(--transition-curve);
 }
+/* DODAJEMY PADDING DLA INPUTÓW Z PRZYCISKIEM */
+.input-with-icon input {
+    padding-right: 3.5rem; /* Miejsce na przycisk */
+}
+
 
 .form-group select {
     -webkit-appearance: none;
@@ -225,16 +232,21 @@ header p {
     box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.2);
 }
 
+/* NOWE STYLE DLA PRZYCISKU LOSOWANIA */
 .random-btn {
     position: absolute;
-    right: 1rem;
+    right: 0.75rem;
     top: 50%;
     transform: translateY(-50%);
     background: none;
     border: none;
     color: var(--text-muted);
     cursor: pointer;
-    padding: 0.25rem;
+    padding: 0.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: color 0.3s var(--transition-curve), transform 0.3s var(--transition-curve);
 }
 
