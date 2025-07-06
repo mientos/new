@@ -7,79 +7,87 @@ const randomItems = [ 'latający dywan', 'znikająca czapka', 'magiczny kompas',
 document.addEventListener('DOMContentLoaded', () => {
     const SCRIPT_URL = 'https://red-band-530b.mientos90.workers.dev';
 
+    const formSection = document.getElementById('form-section');
     const generateBtn = document.getElementById('generateBtn');
-    const loadingDiv = document.getElementById('loading');
-    const resultDiv = document.getElementById('result');
+    const storyContainer = document.getElementById('story-container');
     const storyTitleEl = document.getElementById('storyTitle');
     const storyContentEl = document.getElementById('storyContent');
-    const audioSection = document.getElementById('audio-section');
     const readAloudBtn = document.getElementById('readAloudBtn');
-
-    // Nowe elementy do kontroli muzyki
+    
     const musicPlayer = document.getElementById('musicPlayer');
     const musicVolumeSlider = document.getElementById('musicVolume');
+
+    const btnText = generateBtn.querySelector('.btn-text');
+    const spinnerContainer = generateBtn.querySelector('.spinner-container');
 
     let voicePlayer = null;
     let currentAudioBase64 = null;
     let fadeInterval = null;
 
-    // Funkcje do płynnego pojawiania/znikania muzyki
     const fadeAudio = (player, targetVolume, duration = 1000) => {
         clearInterval(fadeInterval);
+        player.play().catch(e => {}); 
         const startVolume = player.volume;
-        const volumeStep = (targetVolume - startVolume) / (duration / 50);
-
-        player.play().catch(e => console.error("Nie można odtworzyć muzyki:", e));
+        const frameDuration = 50;
+        const totalFrames = duration / frameDuration;
+        const volumeStep = (targetVolume - startVolume) / totalFrames;
 
         fadeInterval = setInterval(() => {
             let newVolume = player.volume + volumeStep;
             if ((volumeStep > 0 && newVolume >= targetVolume) || (volumeStep < 0 && newVolume <= targetVolume)) {
                 newVolume = targetVolume;
                 clearInterval(fadeInterval);
-                if (newVolume === 0) {
+                if (newVolume === 0 && player.id === 'musicPlayer') {
                     player.pause();
                 }
             }
             player.volume = newVolume;
-        }, 50);
+        }, frameDuration);
     };
 
-    const stopCurrentAudio = () => {
+    const stopCurrentAudio = (resetButton = true) => {
         if (voicePlayer) {
             voicePlayer.pause();
             voicePlayer = null;
         }
-        // Wyciszamy muzykę zamiast ją zatrzymywać
-        fadeAudio(musicPlayer, 0); 
-        readAloudBtn.textContent = "Odsłuchaj Bajkę! 🎧";
-        readAloudBtn.disabled = false;
+        if (!musicPlayer.paused) {
+            fadeAudio(musicPlayer, 0); 
+        }
+        if (resetButton) {
+            readAloudBtn.querySelector('.btn-text').textContent = "Odsłuchaj Opowieść";
+            readAloudBtn.disabled = false;
+        }
+    };
+    
+    const setLoadingState = (isLoading) => {
+        generateBtn.disabled = isLoading;
+        btnText.textContent = isLoading ? "Tworzę magię..." : "Stwórz Moją Bajkę";
+        spinnerContainer.classList.toggle('hidden', !isLoading);
     };
 
     const handleGenerateClick = async () => {
         stopCurrentAudio();
+        const inputs = {
+            childName: document.getElementById('childName').value.trim(),
+            animalHelper: document.getElementById('animalHelper').value.trim(),
+            magicPlace: document.getElementById('magicPlace').value.trim(),
+            magicItem: document.getElementById('magicItem').value.trim(),
+        };
 
-        const childName = document.getElementById('childName').value.trim();
-        const animalHelper = document.getElementById('animalHelper').value.trim();
-        const magicPlace = document.getElementById('magicPlace').value.trim();
-        const magicItem = document.getElementById('magicItem').value.trim();
-
-        if (!childName || !animalHelper || !magicPlace || !magicItem) {
-            alert('Proszę wypełnić wszystkie pola!');
+        if (Object.values(inputs).some(val => !val)) {
+            alert('Proszę wypełnić wszystkie pola, by utkać opowieść!');
             return;
         }
 
-        resultDiv.classList.add('hidden');
-        audioSection.classList.add('hidden');
-        loadingDiv.classList.remove('hidden');
-        generateBtn.disabled = true;
-        generateBtn.textContent = "Tworzę magię i dźwięk...";
+        formSection.style.display = 'block';
+        storyContainer.classList.add('hidden');
+        setLoadingState(true);
 
         try {
-            const payload = { childName, animalHelper, magicPlace, magicItem };
             const response = await fetch(SCRIPT_URL, {
                 method: 'POST', mode: 'cors', cache: 'no-cache',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
+                body: JSON.stringify(inputs)
             });
             if (!response.ok) {
                 const errorData = await response.json().catch(() => ({ error: `Błąd serwera: ${response.status}` }));
@@ -93,20 +101,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const content = storyParts.join('<br>');
             storyTitleEl.textContent = title;
             storyContentEl.innerHTML = content;
-            resultDiv.classList.remove('hidden');
 
             if (data.audioBase64) {
                 currentAudioBase64 = data.audioBase64;
-                audioSection.classList.remove('hidden');
-                stopCurrentAudio();
+                formSection.style.display = 'none';
+                storyContainer.classList.remove('hidden');
             }
         } catch (error) {
             console.error('Błąd:', error);
-            alert(`Wystąpił błąd podczas generowania: ${error.message}`);
+            alert(`Wystąpił błąd podczas tkania magii: ${error.message}`);
         } finally {
-            loadingDiv.classList.add('hidden');
-            generateBtn.disabled = false;
-            generateBtn.textContent = "Stwórz kolejną bajkę!";
+            setLoadingState(false);
         }
     };
 
@@ -120,40 +125,32 @@ document.addEventListener('DOMContentLoaded', () => {
         const audioSrc = `data:audio/mp3;base64,${currentAudioBase64}`;
         voicePlayer = new Audio(audioSrc);
         
-        readAloudBtn.textContent = "Odtwarzam... ⏹️";
+        const buttonTextEl = readAloudBtn.querySelector('.btn-text');
+        buttonTextEl.textContent = "Słucham...";
         readAloudBtn.disabled = true;
 
         voicePlayer.play().then(() => {
             readAloudBtn.disabled = false;
-            // Płynnie podgłaśniamy muzykę w tle
             fadeAudio(musicPlayer, musicVolumeSlider.value);
         }).catch(error => {
             console.error("Błąd odtwarzania głosu:", error);
             stopCurrentAudio();
         });
 
-        voicePlayer.addEventListener('ended', stopCurrentAudio);
+        voicePlayer.addEventListener('ended', () => stopCurrentAudio(true));
     };
 
-    // Obsługa suwaka głośności
     musicVolumeSlider.addEventListener('input', () => {
-        const newVolume = musicVolumeSlider.value;
-        // Jeśli muzyka jest aktywna, zmień jej głośność płynnie
         if (!musicPlayer.paused) {
-            musicPlayer.volume = newVolume;
+            musicPlayer.volume = musicVolumeSlider.value;
         }
     });
 
-    // Inicjalizacja przycisków losowania
     const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
-    const randomAnimalBtn = document.getElementById('randomAnimalBtn');
-    const randomPlaceBtn = document.getElementById('randomPlaceBtn');
-    const randomItemBtn = document.getElementById('randomItemBtn');
-    if (randomAnimalBtn) randomAnimalBtn.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('animalHelper').value = getRandomElement(randomAnimals); });
-    if (randomPlaceBtn) randomPlaceBtn.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('magicPlace').value = getRandomElement(randomPlaces); });
-    if (randomItemBtn) randomItemBtn.addEventListener('click', (e) => { e.preventDefault(); document.getElementById('magicItem').value = getRandomElement(randomItems); });
+    document.getElementById('randomAnimalBtn').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('animalHelper').value = getRandomElement(randomAnimals); });
+    document.getElementById('randomPlaceBtn').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('magicPlace').value = getRandomElement(randomPlaces); });
+    document.getElementById('randomItemBtn').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('magicItem').value = getRandomElement(randomItems); });
 
-    // Główne nasłuchiwania
-    if (generateBtn) generateBtn.addEventListener('click', handleGenerateClick);
-    if (readAloudBtn) readAloudBtn.addEventListener('click', handleReadAloudClick);
+    generateBtn.addEventListener('click', handleGenerateClick);
+    readAloudBtn.addEventListener('click', handleReadAloudClick);
 });
