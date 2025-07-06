@@ -46,10 +46,8 @@
     top: 0;
     width: 50%;
     height: 100%;
-    /* Gradient symulujący fałdy teatralnego materiału */
     background-image: linear-gradient(to right, #0a101f 0%, #151e33 20%, #0f172a 50%, #151e33 80%, #0a101f 100%);
     z-index: 101;
-    /* Dłuższa, bardziej majestatyczna animacja */
     transition: transform 2.5s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
@@ -63,7 +61,6 @@
     box-shadow: inset 10px 0 25px -10px rgba(0,0,0,0.6);
 }
 
-/* Stan "otwarty" dla kurtyny */
 #entry-overlay.open .curtain-left {
     transform: translateX(-100%);
 }
@@ -234,7 +231,7 @@ header p {
     background-repeat: no-repeat;
     background-position: right 1rem center;
     background-size: 1.5em;
-    padding-right: 3rem; /* Zapewnia miejsce na strzałkę */
+    padding-right: 3rem; 
 }
 
 .form-group select:focus {
@@ -337,7 +334,6 @@ button#generateBtn:disabled {
 #storyContent::after {
     content: '▋';
     position: absolute;
-    /* Użycie zmiennej CSS do kontrolowania widoczności kursora przez JS */
     opacity: var(--cursor-opacity, 1);
     animation: blink 0.7s infinite;
     color: var(--text-muted);
