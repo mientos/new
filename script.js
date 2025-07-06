@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         voicePlayer.play().then(() => {
             readAloudBtn.disabled = false;
-            fadeAudio(musicPlayer, musicVolumeSlider.value);
+            fadeAudio(musicPlayer, parseFloat(musicVolumeSlider.value));
         }).catch(error => {
             console.error("Błąd odtwarzania głosu:", error);
             stopCurrentAudio();
@@ -140,9 +140,26 @@ document.addEventListener('DOMContentLoaded', () => {
         voicePlayer.addEventListener('ended', () => stopCurrentAudio(true));
     };
 
+    // === POPRAWIONA LOGIKA SUWAKA GŁOŚNOŚCI ===
     musicVolumeSlider.addEventListener('input', () => {
-        if (!musicPlayer.paused) {
-            musicPlayer.volume = musicVolumeSlider.value;
+        // Krok 1: Przerwij jakiekolwiek aktywne "fade'owanie", by dać użytkownikowi pełną kontrolę.
+        clearInterval(fadeInterval);
+        
+        // Krok 2: Odczytaj nową wartość głośności z suwaka.
+        const newVolume = parseFloat(musicVolumeSlider.value);
+        
+        // Krok 3: Ustaw głośność muzyki natychmiast.
+        musicPlayer.volume = newVolume;
+
+        // Krok 4: Inteligentna obsługa - jeśli użytkownik podgłośni, a muzyka jest cicho, włącz ją.
+        if (newVolume > 0 && musicPlayer.paused) {
+            // Odtwarzaj muzykę tylko, jeśli lektor aktualnie mówi. Zapobiega to samotnemu graniu muzyki.
+            if (voicePlayer && !voicePlayer.paused) {
+                 musicPlayer.play().catch(e => {});
+            }
+        } else if (newVolume === 0) {
+            // Jeśli użytkownik zjedzie do zera, zapauzuj muzykę.
+            musicPlayer.pause();
         }
     });
 
