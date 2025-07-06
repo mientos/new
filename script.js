@@ -1,9 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Te listy nie są już potrzebne, bo opcje są w HTML. Zostawiam je na wszelki wypadek.
-    const randomAnimals = [];
-    const randomPlaces = [];
-    const randomItems = [];
-    
     // TWOJA ORYGINALNA PLAYLISTA
     const backgroundMusicPlaylist = [
         'https://cdn.pixabay.com/download/audio/2024/09/22/audio_6a4d382fe6.mp3', 
@@ -52,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     backgroundMusicPlayer.volume = parseFloat(musicVolumeSlider.value);
     backgroundMusicPlayer.load();
 
-    // --- Funkcje pomocnicze (bez zmian w logice) ---
+    // --- Funkcje pomocnicze ---
     const stopCurrentAudio = (resetButton = true) => {
         if (voicePlayer) { voicePlayer.pause(); voicePlayer = null; }
         if (resetButton) {
@@ -201,6 +196,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     musicVolumeSlider.addEventListener('input', () => { backgroundMusicPlayer.volume = parseFloat(musicVolumeSlider.value); });
     voiceVolumeSlider.addEventListener('input', () => { if (voicePlayer) voicePlayer.volume = parseFloat(voiceVolumeSlider.value); });
-    
-    // Usunięto listenery dla starych przycisków losowania
 });
