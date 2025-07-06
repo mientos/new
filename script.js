@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const realmInput = document.getElementById('realmInput');
     const guardianInput = document.getElementById('guardianInput');
     const storyStyleSelect = document.getElementById('storyStyle');
+    const storyLengthSelect = document.getElementById('storyLength');
     const ageCategorySelect = document.getElementById('ageCategory');
 
     // NOWE PRZYCISKI LOSOWANIA
@@ -132,7 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
         isStoryVisible = false;
         storyContainer.classList.add('hidden');
         formSection.style.display = 'block';
-        // Zaktualizowane czyszczenie pól
         childNameInput.value = '';
         motivationInput.value = '';
         realmInput.value = '';
@@ -168,17 +168,16 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const executeGeneration = async () => {
-        // Zaktualizowane pobieranie danych
         const inputs = {
             childName: childNameInput.value.trim(),
             motivation: motivationInput.value.trim(),
             realm: realmInput.value.trim(),
             guardian: guardianInput.value.trim(),
             style: storyStyleSelect.value,
+            storyLength: storyLengthSelect.value,
             ageCategory: ageCategorySelect.value
         };
         
-        // Prosta walidacja
         if (!inputs.childName) {
             alert('Proszę podać imię głównego bohatera!');
             return;
@@ -242,7 +241,6 @@ document.addEventListener('DOMContentLoaded', () => {
         voicePlayer.addEventListener('ended', () => stopCurrentAudio(true));
     };
     
-    // NOWA FUNKCJA DO LOSOWANIA
     const setRandomValue = (inputElement, ideasArray) => {
         const randomIndex = Math.floor(Math.random() * ideasArray.length);
         inputElement.value = ideasArray[randomIndex];
@@ -275,7 +273,6 @@ document.addEventListener('DOMContentLoaded', () => {
     musicVolumeSlider.addEventListener('input', () => { backgroundMusicPlayer.volume = parseFloat(musicVolumeSlider.value); });
     voiceVolumeSlider.addEventListener('input', () => { if (voicePlayer) voicePlayer.volume = parseFloat(voiceVolumeSlider.value); });
 
-    // PODPIĘCIE EVENTÓW DO PRZYCISKÓW LOSOWANIA
     randomMotivationBtn.addEventListener('click', () => setRandomValue(motivationInput, MOTIVATION_IDEAS));
     randomRealmBtn.addEventListener('click', () => setRandomValue(realmInput, REALM_IDEAS));
     randomGuardianBtn.addEventListener('click', () => setRandomValue(guardianInput, GUARDIAN_IDEAS));
