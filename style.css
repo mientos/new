@@ -147,11 +147,20 @@ footer {
     padding-top: 20px;
 }
 
-#generatedImage {
-    width: 100%;
-    max-width: 512px;
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+/* OSTATECZNY STYL PRZYCISKU ILUSTRACJI */
+.image-button {
     display: block;
-    margin: 0 auto;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    padding: 15px 30px;
+    border-radius: var(--border-radius);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+}
+
+.image-button:hover {
+    background-color: #d88e1a;
+    transform: scale(1.02);
 }
