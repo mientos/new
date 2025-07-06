@@ -95,16 +95,20 @@
                         <label for="voiceVolume">
                             <svg><use xlink:href="#icon-volume-high"></use></svg>
                         </label>
-                        <input type="range" id="voiceVolume" min="0" max="1" step="0.05" value="1.0">
+                        <input type="range" id="voiceVolume" class="volume-slider" min="0" max="1" step="0.05" value="1.0">
                     </div>
                 </div>
             </div>
         </main>
         <footer>
             <p>Zaprojektowane z Miłością</p>
-            <button id="toggleMusicBtn" title="Włącz/wyłącz muzykę w tle" aria-label="Włącz lub wyłącz muzykę w tle">
-                <svg><use xlink:href="#icon-music"></use></svg>
-            </button>
+            <!-- ZMIANA: Grupa kontrolek do muzyki w tle -->
+            <div id="music-control-group">
+                <button id="toggleMusicBtn" title="Włącz/wyłącz muzykę w tle" aria-label="Włącz lub wyłącz muzykę w tle">
+                    <svg><use xlink:href="#icon-music"></use></svg>
+                </button>
+                <input type="range" id="musicVolume" class="volume-slider" min="0" max="0.5" step="0.02" value="0.2" title="Głośność muzyki w tle">
+            </div>
         </footer>
     </div>
     <script src="script.js" defer></script>
