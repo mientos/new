@@ -8,7 +8,64 @@ document.addEventListener('DOMContentLoaded', () => {
         'https://cdn.pixabay.com/download/audio/2025/05/09/audio_0192877465.mp3', 
         'https://cdn.pixabay.com/download/audio/2025/05/09/audio_3fb7eb81be.mp3'
     ];
-
+    
+    // --- NOWE, KREATYWNE LISTY POMYSŁÓW ---
+    const MOTIVATION_IDEAS = [
+        'odnaleźć zagubioną melodię wiatru', 'oddać gwiazdę, która spadła z nieba', 'naprawić zepsuty zegar księżycowy',
+        'zrozumieć, dlaczego rzeka przestała szeptać', 'znaleźć lekarstwo dla chorego przyjaciela', 'odkryć, co znajduje się na ostatniej stronie pustej książki',
+        'zebrać najrzadsze kolory do namalowania wschodu słońca', 'nauczyć się języka ptaków', 'odszukać źródło magicznego echa',
+        'zbudować most z tęczy', 'uratować las przed Cichą Mgłą', 'znaleźć zagubiony śmiech królewny', 'odkryć tajemnicę znikających snów',
+        'dostarczyć list do Króla Chmur', 'posadzić drzewo, które rodzi świetliste owoce', 'odczarować kamiennego olbrzyma',
+        'dowiedzieć się, gdzie nocą wędrują cienie', 'odnaleźć nasiono śpiewającego kwiatu', 'zwrócić morzu skradzioną falę',
+        'przynieść słońce do krainy wiecznej zimy', 'odnaleźć mapę do Krainy Nigdy-Nigdy', 'zrozumieć, co smuci starego ducha lasu',
+        'zebrać łzy feniksa, by uleczyć króla', 'odszukać zaginioną bibliotekę szeptów', 'naprawić pęknięte serce golema',
+        'oddać księżycowi jego odbicie z kałuży', 'stworzyć latarnię, która świeci nadzieją', 'odkryć, kto maluje poranną rosę',
+        'odnaleźć klucz do pozytywki grającej wspomnienia', 'uwolnić duszki uwięzione w bursztynie', 'zbudować statek, który potrafi pływać po niebie',
+        'odszukać zaginiony kolor – indygo', 'pokonać własny strach przed ciemnością', 'przeprosić gnomy za zdeptany muchomor',
+        'odnaleźć przepis na zupę z chmur', 'zrozumieć mowę kamieni', 'oddać wiatrowi jego zagubione piosenki',
+        'zebrać wszystkie zagubione guziki świata', 'znaleźć okulary dla krótkowzrocznego smoka', 'odbudować zamek z piasku przed przypływem',
+        'nauczyć tańczyć nieśmiałe choinki', 'znaleźć ostatnią rymowankę do kołysanki', 'pomóc słońcu wstać, gdy zaspało',
+        'odszukać wyspę, na której czas płynie wolniej', 'napisać list do kogoś, kto mieszka w lustrze', 'oddać echo jego prawdziwemu głosowi',
+        'odkryć, dlaczego kwiaty zamykają się na noc', 'przynieść wodę do wyschniętego strumienia', 'złapać spadający sen i go spełnić'
+    ];
+    const REALM_IDEAS = [
+        'Szeptunowy Las, gdzie drzewa znają sekrety', 'Miasto Zwisających Zegarów, gdzie czas płynie inaczej', 'Kryształowe Bagna, które lśnią w świetle księżyca',
+        'Zapomniane Poddasze, gdzie kurz pamięta dawne historie', 'Archipelag Latających Wysp, połączonych tęczowymi mostami', 'Podziemna Biblioteka, w której książki same opowiadają historie',
+        'Dolina Porcelanowych Dzwonków', 'Szklana Pustynia, gdzie fatamorgany są prawdziwe', 'Kraina Odwróconych Wodospadów',
+        'Miasto z Piernika, strzeżone przez lukrowych rycerzy', 'Las, w którym rosną latarnie zamiast drzew', 'Podniebne Królestwo Ptaków',
+        'Zatopione Miasto Dzwonów', 'Ogród, w którym kwiaty świecą w nocy', 'Kraina Wiecznej Jesieni', 'Góry Szeptów i Ech',
+        'Kolebka Chmur, gdzie rodzi się deszcz', 'Marmurowy Labirynt Czasu', 'Wyspa Zapomnianych Zabawek', 'Równina Atramentowych Rzek',
+        'Królestwo Utkane z Pajęczej Nici', 'Miasto Mechanicznych Cudów', 'Cukierkowy Las', 'Kraina, gdzie góry są z książek',
+        'Dolina Śpiących Olbrzymów', 'Lodowe Ogrody Królowej Zimy', 'Kraina Snów na Jawie', 'Wąwóz Zagubionych Myśli',
+        'Królestwo Podziemnych Jezior', 'Miasto zbudowane na grzbiecie wielkiego żółwia', 'Las, w którym drzewa mają srebrne liście',
+        'Kraina, gdzie gwiazdy można zbierać jak jagody', 'Port Mglistych Tajemnic', 'Ciche Wzgórza Melancholii',
+        'Królestwo, w którym wszystko jest do góry nogami', 'Pola Szklanych Maków', 'Jaskinia Kryształowych Szeptów',
+        'Miasto Zbudowane z Nut', 'Kraina, gdzie cienie żyją własnym życiem', 'Tęczowe Mokradła', 'Dolina Skamieniałych Opowieści',
+        'Las, w którym zamiast deszczu padają litery', 'Królestwo Zwierciadeł', 'Wyspa, na której rosną drzewa śmiechu',
+        'Góry, które oddychają', 'Miasto na Chmurze', 'Labirynt z żywopłotu, który zmienia kształt',
+        'Kraina, gdzie wspomnienia rosną na drzewach', 'Podwodny las wodorostów'
+    ];
+    const GUARDIAN_IDEAS = [
+        'stary golem z mchu, który strzeże zapomnianych ścieżek', 'chytry lis w cylindrze, który handluje zagadkami', 'ostatni smok, który zieje bańkami mydlanymi pełnymi wspomnień',
+        'mechaniczny słowik, który zna wszystkie pieśni przeszłości i przyszłości', 'nieśmiały duch studni, który mówi tylko szeptem', 'niewidzialny kot, którego można dostrzec tylko po jego uśmiechu',
+        'mądra sowa w okularach, która jest bibliotekarzem', 'kamienny lew, który ożywa o zmierzchu', 'mała wróżka, która maluje skrzydła motylom',
+        'gadatliwe drzewo, które opowiada historie każdemu, kto usiądzie w jego cieniu', 'olbrzym, który nosi na plecach całą wioskę', 'skrzat, który kolekcjonuje zagubione guziki',
+        'strażnik mostu, który przepuszcza tylko tych, co rozśmieszą go do łez', 'feniks, który odradza się z popiołów smutku', 'wilk, który nauczył się grać na flecie',
+        'syrena, która zamiast śpiewać, opowiada najlepsze dowcipy', 'goblin-wynalazca, którego maszyny zawsze wybuchają śmiechem', 'duch starego latarnika morskiego',
+        'smutny troll, który strzeże jaskini pełnej skarbów, ale pragnie tylko przyjaciela', 'tańczący niedźwiedź, który zna drogę przez najgęstszy las',
+        'centaur-astronom, który czyta przyszłość z gwiazd', 'krasnoludzki kowal, który wykuwa sny', 'elf, który potrafi rozmawiać z roślinami',
+        'wąż, którego łuski są jak strony z księgi czarów', 'pająk, który tka mapy z srebrnej nici', 'gryf, który strzeże górskiego szczytu',
+        'kobieta-księżyc, która schodzi na ziemię raz w miesiącu', 'chłopiec, który potrafi zamieniać łzy w perły', 'strażnik czasu, który drzemie w starej wieży zegarowej',
+        'kameleon, który potrafi stać się niewidzialny, gdy jest zawstydzony', ' borsuk-erudyta, który prowadzi podziemną herbaciarnię',
+        'kapitan statku-widmo, który szuka zaginionego portu', 'rycerz w zbroi z porcelany, który boi się pęknięć', 'czarodziej, który zapomniał swoich najpotężniejszych zaklęć',
+        'strażniczka ogrodu, która pielęgnuje kwiaty o ludzkich uczuciach', 'mól książkowy, który zjada tylko nudne historie', 'duch lustra, który pokazuje tylko prawdę',
+        'wiewiórka, która jest królową całego lasu', 'żaba, która nosi koronę i czeka na obietnicę, a nie pocałunek',
+        'jednorożec, który stracił swój róg i szuka go w ludzkich sercach', 'królik, który jest posłańcem między światem snów a jawą',
+        'golem zrobiony z chmur, który zmienia kształt z każdym podmuchem wiatru', 'strażnik rzeki, który pozwala przejść w zamian za ciekawą opowieść',
+        'mały robaczek świętojański, który jest najjaśniejszą latarnią w najciemniejszą noc', 'skrzydlaty kot, który przynosi wiadomości z dachów świata',
+        'grzyb, który potrafi mówić, ale tylko w deszczowe dni', 'srebrna lisica, która prowadzi wędrowców światłem swojego ogona', 'duch starego zegarmistrza, który potrafi cofnąć czas o minutę'
+    ];
+    
     // --- Pobranie elementów DOM ---
     const entryOverlay = document.getElementById('entry-overlay');
     const enterBtn = document.getElementById('enterBtn');
@@ -26,13 +83,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnText = generateBtn.querySelector('.btn-text');
     const spinnerContainer = generateBtn.querySelector('.spinner-container');
     
-    // NOWE POLA FORMULARZA
+    // ZMODYFIKOWANE POBIERANIE PÓL FORMULARZA
     const childNameInput = document.getElementById('childName');
-    const motivationSelect = document.getElementById('motivation');
-    const realmSelect = document.getElementById('realm');
-    const guardianSelect = document.getElementById('guardian');
+    const motivationInput = document.getElementById('motivationInput');
+    const realmInput = document.getElementById('realmInput');
+    const guardianInput = document.getElementById('guardianInput');
     const storyStyleSelect = document.getElementById('storyStyle');
     const ageCategorySelect = document.getElementById('ageCategory');
+
+    // NOWE PRZYCISKI LOSOWANIA
+    const randomMotivationBtn = document.getElementById('randomMotivationBtn');
+    const randomRealmBtn = document.getElementById('randomRealmBtn');
+    const randomGuardianBtn = document.getElementById('randomGuardianBtn');
 
     // --- Zmienne stanu aplikacji ---
     let voicePlayer = null;
@@ -70,7 +132,11 @@ document.addEventListener('DOMContentLoaded', () => {
         isStoryVisible = false;
         storyContainer.classList.add('hidden');
         formSection.style.display = 'block';
+        // Zaktualizowane czyszczenie pól
         childNameInput.value = '';
+        motivationInput.value = '';
+        realmInput.value = '';
+        guardianInput.value = '';
         btnText.textContent = 'Stwórz Moją Bajkę';
     };
     
@@ -102,17 +168,23 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const executeGeneration = async () => {
+        // Zaktualizowane pobieranie danych
         const inputs = {
             childName: childNameInput.value.trim(),
-            motivation: motivationSelect.value,
-            realm: realmSelect.value,
-            guardian: guardianSelect.value,
+            motivation: motivationInput.value.trim(),
+            realm: realmInput.value.trim(),
+            guardian: guardianInput.value.trim(),
             style: storyStyleSelect.value,
             ageCategory: ageCategorySelect.value
         };
-
+        
+        // Prosta walidacja
         if (!inputs.childName) {
             alert('Proszę podać imię głównego bohatera!');
+            return;
+        }
+         if (!inputs.motivation || !inputs.realm || !inputs.guardian) {
+            alert('Proszę wypełnić wszystkie pola fabuły lub użyć przycisku losowania!');
             return;
         }
         
@@ -169,6 +241,12 @@ document.addEventListener('DOMContentLoaded', () => {
             .catch(error => { console.error("Błąd odtwarzania głosu:", error); stopCurrentAudio(); });
         voicePlayer.addEventListener('ended', () => stopCurrentAudio(true));
     };
+    
+    // NOWA FUNKCJA DO LOSOWANIA
+    const setRandomValue = (inputElement, ideasArray) => {
+        const randomIndex = Math.floor(Math.random() * ideasArray.length);
+        inputElement.value = ideasArray[randomIndex];
+    };
 
     // --- Podpięcie Event Listenerów ---
     enterBtn.addEventListener('click', () => {
@@ -196,4 +274,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     musicVolumeSlider.addEventListener('input', () => { backgroundMusicPlayer.volume = parseFloat(musicVolumeSlider.value); });
     voiceVolumeSlider.addEventListener('input', () => { if (voicePlayer) voicePlayer.volume = parseFloat(voiceVolumeSlider.value); });
+
+    // PODPIĘCIE EVENTÓW DO PRZYCISKÓW LOSOWANIA
+    randomMotivationBtn.addEventListener('click', () => setRandomValue(motivationInput, MOTIVATION_IDEAS));
+    randomRealmBtn.addEventListener('click', () => setRandomValue(realmInput, REALM_IDEAS));
+    randomGuardianBtn.addEventListener('click', () => setRandomValue(guardianInput, GUARDIAN_IDEAS));
 });
