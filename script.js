@@ -62,20 +62,35 @@ document.addEventListener('DOMContentLoaded', () => {
         btnText.textContent = 'Stwórz Moją Bajkę';
     };
     
-    const typewriterEffect = (element, text, callback) => {
-        element.innerHTML = '';
+    // --- NOWA, POPRAWIONA FUNKCJA TYPEWRITER ---
+    const typewriterEffect = (element, htmlString, callback) => {
+        // Wyczyść poprzednie animacje i listenery
         if (typewriterInterval) clearInterval(typewriterInterval);
         if (skipTypewriterHandler) document.removeEventListener('click', skipTypewriterHandler);
-        
-        let i = 0;
+        element.innerHTML = '';
         element.style.setProperty('--cursor-opacity', '1');
 
+        // 1. Stwórz listę "zadań" do wykonania (dodanie znaku lub całego elementu)
+        const tasks = [];
+        const source = document.createElement('div');
+        source.innerHTML = htmlString;
+
+        function createTasksFromNode(node) {
+            for (const child of node.childNodes) {
+                if (child.nodeType === Node.TEXT_NODE) {
+                    tasks.push(...child.textContent.split('').map(char => ({ type: 'char', value: char })));
+                } else if (child.nodeType === Node.ELEMENT_NODE) {
+                    tasks.push({ type: 'element', value: child });
+                }
+            }
+        }
+        createTasksFromNode(source);
+        
+        // 2. Funkcja do natychmiastowego zakończenia animacji
         const completeAnimation = () => {
             clearInterval(typewriterInterval);
-            typewriterInterval = null;
-            element.innerHTML = text;
+            element.innerHTML = htmlString;
             element.style.setProperty('--cursor-opacity', '0');
-            // Usuwamy listener, ponieważ nie jest już potrzebny
             if (skipTypewriterHandler) {
                 document.removeEventListener('click', skipTypewriterHandler);
                 skipTypewriterHandler = null;
@@ -87,16 +102,25 @@ document.addEventListener('DOMContentLoaded', () => {
         // Opóźnienie dodania listenera, aby uniknąć konfliktu z kliknięciem generującym
         setTimeout(() => {
             document.addEventListener('click', skipTypewriterHandler, { once: true });
-        }, 0);
+        }, 10);
         
+        // 3. Uruchom interwał, który wykonuje zadania z listy
+        let taskIndex = 0;
         typewriterInterval = setInterval(() => {
-            if (i < text.length) {
-                element.innerHTML += text.charAt(i);
-                i++;
-            } else {
-                completeAnimation(); // Animacja zakończona naturalnie
+            if (taskIndex >= tasks.length) {
+                completeAnimation();
+                return;
             }
-        }, 15); // Przyspieszona szybkość pisania
+            
+            const task = tasks[taskIndex];
+            if (task.type === 'char') {
+                element.innerHTML += task.value;
+            } else if (task.type === 'element') {
+                element.appendChild(task.value.cloneNode(true));
+            }
+            
+            taskIndex++;
+        }, 15); // Szybkość pisania
     };
 
     const executeGeneration = async () => {
@@ -125,21 +149,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             if (data.error) throw new Error(data.error);
             
-            // --- NOWA, ULEPSZONA LOGIKA FORMATOWANIA TEKSTU ---
-            // 1. Wyczyść tekst z białych znaków na początku i końcu.
+            // Ulepszone formatowanie tekstu
             const rawStory = data.story.trim();
             const storyParts = rawStory.split('\n');
-
-            // 2. Wyczyść tytuł.
             const title = storyParts.shift().replace(/[\*#]/g, '').trim();
-
-            // 3. Przetwórz treść: odfiltruj puste linie, połącz z <br>, a następnie przekonwertuj Markdown.
             let content = storyParts
                 .filter(line => line.trim() !== '') // Usuń puste linie
-                .join('<br>'); // Połącz nie-puste linie
-
-            // 4. Przekonwertuj **pogrubienie** z Markdown na <strong>tagi HTML</strong>.
-            content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                .join('<br>') // Połącz nie-puste linie
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Konwertuj Markdown na HTML
 
             storyTitleEl.textContent = title;
 
@@ -186,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleMusicBtn.classList.add('is-playing');
         toggleMusicBtn.title = "Wyłącz muzykę w tle";
         
-        setTimeout(() => { entryOverlay.style.display = 'none'; }, 2600); // Czas nieco dłuższy niż animacja kurtyny
+        setTimeout(() => { entryOverlay.style.display = 'none'; }, 2600);
     });
     
     generateBtn.addEventListener('click', () => { isStoryVisible ? resetToFormView() : executeGeneration(); });
