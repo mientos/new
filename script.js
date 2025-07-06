@@ -65,7 +65,7 @@ const randomItems = [
 
 document.addEventListener('DOMContentLoaded', () => {
     // === WAŻNE: Wstaw tutaj swój adres URL z Cloudflare! ===
-    const SCRIPT_URL = 'TUTAJ_WKLEJ_SWOJ_ADRES_URL_Z_CLOUDFLARE';
+    const SCRIPT_URL = 'https://red-band-530b.mientos90.workers.dev';
 
     const generateBtn = document.getElementById('generateBtn');
     const loadingDiv = document.getElementById('loading');
