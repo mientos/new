@@ -64,7 +64,6 @@ const randomItems = [
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // === WAŻNE: Wstaw tutaj swój adres URL z Cloudflare! ===
     const SCRIPT_URL = 'TUTAJ_WKLEJ_SWOJ_ADRES_URL_Z_CLOUDFLARE';
 
     const generateBtn = document.getElementById('generateBtn');
@@ -73,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const storyTitleEl = document.getElementById('storyTitle');
     const storyContentEl = document.getElementById('storyContent');
     const imageSection = document.getElementById('image-section');
+    // POPRAWKA: Pobieramy link, a nie obrazek
     const imageLink = document.getElementById('imageLink');
 
     const handleGenerateClick = async () => {
@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resultDiv.classList.remove('hidden');
 
             if (data.imageUrl) {
+                // POPRAWKA: Ustawiamy atrybut href dla linku, a nie src dla obrazka
                 imageLink.href = data.imageUrl;
                 imageSection.classList.remove('hidden');
             }
