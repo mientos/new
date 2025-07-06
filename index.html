@@ -27,6 +27,10 @@
             <symbol id="icon-sparkle" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M12 2.5l1.55 3.55L17.5 7.5l-3.55 1.55L12 12.5l-1.55-3.45L7 7.5l3.45-1.45L12 2.5zM6 10l-2 4.5l-4.5-2l4.5-2L6 6l2 4.5L12.5 10l-4.5 2zM18 14l-2-4.5l4.5 2l-4.5 2L18 18l-2-4.5l4.5-2z"/>
             </symbol>
+            <!-- NOWA IKONA DLA PRZYCISKU LOSOWANIA -->
+            <symbol id="icon-dice" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19 3H5c-1.11 0-2 .89-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.11-.9-2-2-2m-4 14h-2v-2h2v2m0-4h-2v-2h2v2m0-4h-2V7h2v2m-4 8H9v-2h2v2m-4-4H7v-2h2v2m4-4h-2V7h2v2m4-4H9V7h2v2h2V7h2v2Z"/>
+            </symbol>
             <symbol id="icon-volume-high" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/>
             </symbol>
@@ -49,47 +53,40 @@
 
         <main>
             <div id="form-section">
-                <!-- PRZYWRÓCONY, POPRAWNY UKŁAD FORMULARZA -->
+                <!-- ZMODYFIKOWANY FORMULARZ -->
                 <div class="form-group">
                     <label for="childName">Imię Głównego Bohatera</label>
                     <input type="text" id="childName" placeholder="np. Zosia, Krzyś">
                 </div>
 
                 <div class="form-group">
-                    <label for="motivation">Główna Motywacja Bohatera</label>
-                    <select id="motivation">
-                        <option>odnaleźć zagubioną melodię</option>
-                        <option>oddać gwiazdę, która spadła z nieba</option>
-                        <option>naprawić zepsuty zegar księżycowy</option>
-                        <option>zrozumieć, dlaczego rzeka przestała szeptać</option>
-                        <option>znaleźć lekarstwo dla chorego przyjaciela</option>
-                        <option>odkryć, co znajduje się na ostatniej stronie pustej książki</option>
-                        <option>zebrać najrzadsze kolory do namalowania wschodu słońca</option>
-                    </select>
+                    <label for="motivationInput">Główna Motywacja Bohatera</label>
+                    <div class="input-with-icon">
+                        <input type="text" id="motivationInput" placeholder="Wpisz motywację lub wylosuj pomysł">
+                        <button id="randomMotivationBtn" class="random-btn" title="Wylosuj pomysł">
+                            <svg><use xlink:href="#icon-dice"></use></svg>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="realm">Kraina i jej Nastrój</label>
-                    <select id="realm">
-                        <option>Szeptunowy Las, gdzie drzewa znają sekrety</option>
-                        <option>Miasto Zwisających Zegarów, gdzie czas płynie inaczej</option>
-                        <option>Kryształowe Bagna, które lśnią w świetle księżyca</option>
-                        <option>Zapomniane Poddasze, gdzie kurz pamięta dawne historie</option>
-                        <option>Archipelag Latających Wysp, połączonych tęczowymi mostami</option>
-                        <option>Podziemna Biblioteka, w której książki same opowiadają historie</option>
-                    </select>
+                    <label for="realmInput">Kraina i jej Nastrój</label>
+                    <div class="input-with-icon">
+                        <input type="text" id="realmInput" placeholder="Wpisz krainę lub wylosuj pomysł">
+                         <button id="randomRealmBtn" class="random-btn" title="Wylosuj pomysł">
+                            <svg><use xlink:href="#icon-dice"></use></svg>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="guardian">Tajemniczy Strażnik i jego Rola</label>
-                    <select id="guardian">
-                        <option>stary golem z mchu, który strzeże zapomnianych ścieżek</option>
-                        <option>chytry lis w cylindrze, który handluje zagadkami</option>
-                        <option>ostatni smok, który zieje bańkami mydlanymi pełnymi wspomnień</option>
-                        <option>mechaniczny słowik, który zna wszystkie pieśni przeszłości i przyszłości</option>
-                        <option>nieśmiały duch studni, który mówi tylko szeptem</option>
-                        <option>niewidzialny kot, którego można dostrzec tylko po jego uśmiechu</option>
-                    </select>
+                    <label for="guardianInput">Tajemniczy Strażnik i jego Rola</label>
+                     <div class="input-with-icon">
+                        <input type="text" id="guardianInput" placeholder="Wpisz strażnika lub wylosuj pomysł">
+                         <button id="randomGuardianBtn" class="random-btn" title="Wylosuj pomysł">
+                            <svg><use xlink:href="#icon-dice"></use></svg>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="form-group">
