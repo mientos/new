@@ -1,27 +1,16 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-5H9MZKJJ');</script>
-<!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twój Teatr Bajek AI</title>
-    <meta name="description" content="Stwórz i odsłuchaj unikalną, udźwiękowioną bajkę. Zaprojektowane, by wyciszać i inspirować.">
+    <title>Teatr Bajek AI – Stwórz Personalizowane Bajki na Dobranoc</title>
+    <meta name="description" content="Generator bajek AI, w którym stworzysz unikalną, personalizowaną opowieść na dobranoc dla Twojego dziecka. Wpisz imię, wybierz motyw i słuchaj magicznej bajki!">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5H9MZKJJ"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
     <div id="entry-overlay">
         <div class="curtain-left"></div>
         <div class="entry-content">
@@ -140,9 +129,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
     
                 <div id="audio-section">
-                    <button id="readAloudBtn" class="audio-button">
-                        <span class="btn-text">Odsłuchaj Opowieść</span>
-                    </button>
+                    <!-- NOWY KONTENER DLA PRZYCISKÓW AKCJI -->
+                    <div id="story-actions">
+                        <button id="readAloudBtn" class="audio-button">
+                            <span class="btn-text">Odsłuchaj Opowieść</span>
+                        </button>
+                        <button id="expandStoryBtn" class="audio-button">
+                            <span class="btn-text">Rozwiń Opowieść</span>
+                            <span class="spinner-container hidden"><div class="spinner"></div></span>
+                        </button>
+                    </div>
                     <div id="volume-control-section">
                         <label for="voiceVolume">
                             <svg><use xlink:href="#icon-volume-high"></use></svg>
