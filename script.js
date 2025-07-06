@@ -23,6 +23,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let voicePlayer = null;
     let currentAudioBase64 = null;
     let fadeInterval = null;
+    
+    // Zmienna śledząca aktualny stan widoku
+    let isStoryVisible = false;
 
     const fadeAudio = (player, targetVolume, duration = 1000) => {
         clearInterval(fadeInterval);
@@ -61,12 +64,32 @@ document.addEventListener('DOMContentLoaded', () => {
     
     const setLoadingState = (isLoading) => {
         generateBtn.disabled = isLoading;
-        btnText.textContent = isLoading ? "Tworzę magię..." : "Stwórz Moją Bajkę";
+        if (isLoading) {
+             btnText.textContent = "Tworzę magię...";
+        }
         spinnerContainer.classList.toggle('hidden', !isLoading);
+        btnText.classList.toggle('hidden', isLoading);
     };
 
-    const handleGenerateClick = async () => {
+    const resetToFormView = () => {
         stopCurrentAudio();
+        isStoryVisible = false;
+        
+        storyContainer.classList.add('hidden');
+        formSection.style.display = 'block';
+        
+        // Czyścimy pola formularza dla nowej historii
+        document.getElementById('childName').value = '';
+        document.getElementById('animalHelper').value = '';
+        document.getElementById('magicPlace').value = '';
+        document.getElementById('magicItem').value = '';
+        
+        // Resetujemy tekst głównego przycisku
+        btnText.textContent = 'Stwórz Moją Bajkę';
+        btnText.classList.remove('hidden');
+    };
+    
+    const executeGeneration = async () => {
         const inputs = {
             childName: document.getElementById('childName').value.trim(),
             animalHelper: document.getElementById('animalHelper').value.trim(),
@@ -78,9 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert('Proszę wypełnić wszystkie pola, by utkać opowieść!');
             return;
         }
-
-        formSection.style.display = 'block';
-        storyContainer.classList.add('hidden');
+        
         setLoadingState(true);
 
         try {
@@ -106,6 +127,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentAudioBase64 = data.audioBase64;
                 formSection.style.display = 'none';
                 storyContainer.classList.remove('hidden');
+                
+                // Aktualizujemy stan i tekst przycisku po sukcesie
+                isStoryVisible = true;
+                btnText.textContent = 'Stwórz Nową Opowieść';
             }
         } catch (error) {
             console.error('Błąd:', error);
@@ -140,34 +165,34 @@ document.addEventListener('DOMContentLoaded', () => {
         voicePlayer.addEventListener('ended', () => stopCurrentAudio(true));
     };
 
-    // === POPRAWIONA LOGIKA SUWAKA GŁOŚNOŚCI ===
     musicVolumeSlider.addEventListener('input', () => {
-        // Krok 1: Przerwij jakiekolwiek aktywne "fade'owanie", by dać użytkownikowi pełną kontrolę.
         clearInterval(fadeInterval);
-        
-        // Krok 2: Odczytaj nową wartość głośności z suwaka.
         const newVolume = parseFloat(musicVolumeSlider.value);
-        
-        // Krok 3: Ustaw głośność muzyki natychmiast.
         musicPlayer.volume = newVolume;
-
-        // Krok 4: Inteligentna obsługa - jeśli użytkownik podgłośni, a muzyka jest cicho, włącz ją.
         if (newVolume > 0 && musicPlayer.paused) {
-            // Odtwarzaj muzykę tylko, jeśli lektor aktualnie mówi. Zapobiega to samotnemu graniu muzyki.
             if (voicePlayer && !voicePlayer.paused) {
                  musicPlayer.play().catch(e => {});
             }
         } else if (newVolume === 0) {
-            // Jeśli użytkownik zjedzie do zera, zapauzuj muzykę.
             musicPlayer.pause();
         }
     });
-
+    
     const getRandomElement = (arr) => arr[Math.floor(Math.random() * arr.length)];
     document.getElementById('randomAnimalBtn').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('animalHelper').value = getRandomElement(randomAnimals); });
     document.getElementById('randomPlaceBtn').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('magicPlace').value = getRandomElement(randomPlaces); });
     document.getElementById('randomItemBtn').addEventListener('click', (e) => { e.preventDefault(); document.getElementById('magicItem').value = getRandomElement(randomItems); });
 
-    generateBtn.addEventListener('click', handleGenerateClick);
+    // === GŁÓWNA LOGIKA INTELIGENTNEGO PRZYCISKU ===
+    generateBtn.addEventListener('click', () => {
+        if (isStoryVisible) {
+            // Jeśli historia jest widoczna, wracamy do formularza
+            resetToFormView();
+        } else {
+            // W przeciwnym razie, generujemy nową bajkę
+            executeGeneration();
+        }
+    });
+    
     readAloudBtn.addEventListener('click', handleReadAloudClick);
 });
