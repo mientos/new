@@ -4,14 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const randomPlaces = [ 'Tęczowy Las', 'Podwodna Kraina Koralowców', 'Latająca Wyspa Chmur', 'Kryształowa Jaskinia Szeptów', 'Zaczarowany Ogród Pełen Kwiatów', 'Gwiezdna Pustynia', 'Miasto Złotych Wież', 'Dolina Zaginionych Rzek', 'Wulkan Czekolady', 'Księżycowe Jezioro', 'Wioska na Grzbiecie Olbrzyma', 'Biblioteka Zaginionych Opowieści', 'Sklep z Latającymi Dywanami', 'Fabryka Snów', 'Port Powietrznych Statków', 'Archipelag Szeptu', 'Kanion Echa', 'Pola Wiecznej Wiosny', 'Zamarznięte Królestwo Czasu', 'Labirynt z Żywopłotu', 'Wodospad Melodii', 'Ukryte Miasto w Dżungli', 'Cyrk na Końcu Świata', 'Tajemnicza Latarnia Morska', 'Opuszczona Stacja Kolejowa Duchów', 'Most z Tęczy', 'Pałac na Dnie Oceanu', 'Szczyt Najwyższej Góry Świata', 'Dolina Śpiących Smoków', 'Wioska Elfów w Koronach Drzew', 'Rynek Niewidzialnych Towarów', 'Kraina, gdzie rzeki płyną do góry', 'Pustynia, gdzie pada słodki deszcz', 'Las, w którym drzewa rozmawiają', 'Miasto zbudowane z piernika', 'Wyspa, która podróżuje po morzu', 'Jaskinia, w której ściany świecą', 'Zamek zrobiony z chmur', 'Podziemne królestwko krasnoludów', 'Akademia Magii i Czarodziejstwa', 'Kraina Zabawy Bez Końca', 'Miasteczko, gdzie czas płynie wolniej', 'Oaza Spokoju', 'Port Kosmiczny dla Statków Międzygwiezdnych', 'Planeta Cukierków', 'Mglista Dolina Tajemnic', 'Zatoka Syren', 'Kraina Wiecznego Słońca', 'Wyspa Skarbów Kapitana Brudnobrodego', 'Wioska Wikingów nad Zatoką Fiordów', 'Starożytne Ruiny w Sercu Dżungli', 'Lodowy Pałac Królowej Śniegu', 'Wielki Mur z Czekolady', 'Pole Bitwy Zabawek', 'Kraina Gigantycznych Warzyw', 'Miasto Robotów', 'Podniebne Miasteczko Ptaków', 'Wesołe Miasteczko na Księżycu', 'Kraina, gdzie wszystko jest do góry nogami', 'Las Grzybów Wielkości Domów', 'Równina Centaurów', 'Królestwo pod Górą', 'Wieża Czarodzieja', 'Zaczarowana Polana', 'Tajemniczy Staw', 'Mroczny Bór', 'Słoneczna Łąka', 'Wysokie Góry', 'Szeroka Rzeka', 'Głęboki Ocean', 'Gorąca Pustynia', 'Zimna Tundra', 'Gęsta Dżungla', 'Ciche Wzgórza', 'Kamienista Plaża', 'Tajemnicza Wyspa', 'Ukryta Dolina', 'Zaginione Miasto', 'Starożytna Świątynia', 'Opuszczony Zamek', 'Tętniące życiem miasto', 'Spokojna wioska', 'Tajemniczy ogród', 'Zaczarowany las', 'Magiczna polana', 'Latający zamek', 'Podwodny świat', 'Kosmiczna stacja', 'Inna planeta', 'Kraina baśni', 'Świat snów' ];
     const randomItems = [ 'latający dywan', 'znikająca czapka', 'magiczny kompas', 'ołówek, który rysuje prawdziwe rzeczy', 'mówiące lusterko', 'butelka z nieskończoną lemoniadą', 'klucz otwierający każde drzwi', 'świecące nasiono', 'buty pozwalające chodzić po wodzie', 'pióro piszące złotem', 'grająca muszelka', 'samomieszająca się filiżanka', 'koc, który opowiada bajki', 'latarka świecąca ciemnością', 'flet, który ożywia rośliny', 'kamień, który pokazuje wspomnienia', 'zegarek zatrzymujący czas', 'lornetka pozwalająca widzieć przyszłość', 'plecak bez dna', 'magiczna fasolka', 'czarodziejska różdżka', 'mikstura niewidzialności', 'eliksir siły', 'księga zaklęć', 'kryształowa kula', 'mapa skarbów, która mówi', 'siedmiomilowe buty', 'czapka niewidka', 'latająca miotła', 'złote jabłko', 'srebrne strzały', 'miecz, który nigdy nie chybia', 'tarcza, która wszystko odbija', 'zaczarowany flet', 'magiczna harfa', 'cudowny pierścień', 'amulet chroniący przed złem', 'talizman przynoszący szczęście', 'kryształ przewidywania', 'kamień filozoficzny', 'dywan, który czyta w myślach', 'okulary pozwalające widzieć przez ściany', 'rękawice dające super siłę', 'perfumy zmieniające nastrój', 'aparat fotografujący marzenia', 'grzebień, który prostuje kręte ścieżki', 'łyżka, która sprawia, że każda zupa jest pyszna', 'poduszka, która gwarantuje piękne sny', 'sznurowadła, które nigdy się nie rozwiązują', 'długopis, który nigdy się nie wypisuje', 'książka, której historia zmienia się za każdym razem', 'farby, które malują ruchome obrazy', 'nożyczki, które potrafią przeciąć zmartwienia', 'klej, który potrafi skleić złamane serce', 'chmura, którą można schować do kieszeni', 'gwiazda, którą można komuś podarować', 'kieszonkowa tęcza', 'słoik pełen śmiechu', 'muzyka, którą można zobaczyć', 'smak, który można usłyszeć', 'zapach, który można dotknąć', 'słowo, które leczy', 'uśmiech, który rozjaśnia mrok', 'pomysł, który zmienia świat', 'marzenie, które się spełnia', 'wspomnienie, które ogrzewa', 'nadzieja, która dodaje skrzydeł', 'miłość, która zwycięża wszystko', 'przyjaźń, która trwa wiecznie', 'odwaga, która pokonuje strach', 'mądrość, która wskazuje drogę', 'szczęście, które można znaleźć wszędzie', 'przygoda, która czeka za rogiem', 'tajemnica, którą trzeba odkryć', 'zagadka, którą trzeba rozwiązać', 'cel, który trzeba osiągnąć', 'droga, którą trzeba przejść', 'wyzwanie, któremu trzeba sprostać', 'przeszkoda, którą trzeba pokonać', 'trudność, z którą trzeba się zmierzyć' ];
 
-    // ZMIANA: Playlista z muzyką w tle. Możesz tu dodawać i usuwać linki.
+    // ZMIANA: Playlista z kojącą muzyką w tle.
     const backgroundMusicPlaylist = [
         'https://cdn.pixabay.com/download/audio/2024/09/22/audio_6a4d382fe6.mp3', // Pozytywka
         'https://cdn.pixabay.com/download/audio/2024/08/06/audio_81f51dde6c.mp3', // Spokojna kołysanka
         'https://cdn.pixabay.com/download/audio/2024/12/18/audio_e07679a5ce.mp3',  // Magiczne dzwonki
         'https://cdn.pixabay.com/download/audio/2025/04/27/audio_835501c0f8.mp3', // Pozytywka
         'https://cdn.pixabay.com/download/audio/2025/05/09/audio_0192877465.mp3', // Spokojna kołysanka
-        'https://cdn.pixabay.com/download/audio/2025/05/09/audio_3fb7eb81be.mp3'  // Magiczne dzwonki
+        'https://cdn.pixabay.com/download/audio/2025/05/09/audio_3fb7eb81be.mp3'  // Magiczne dzwonki  // Calm Fantasy
     ];
 
     // --- Pobranie wszystkich elementów DOM na początku ---
@@ -35,19 +35,15 @@ document.addEventListener('DOMContentLoaded', () => {
     let voicePlayer = null;
     let currentAudioBase64 = null;
     let isStoryVisible = false;
+    let typewriterInterval = null; // ZMIANA: do kontroli animacji pisania
 
     // --- Inicjalizacja Aplikacji ---
-    
-    // ZMIANA: Logika losowania i ładowania utworu
     const randomIndex = Math.floor(Math.random() * backgroundMusicPlaylist.length);
-    const selectedTrack = backgroundMusicPlaylist[randomIndex];
-    backgroundMusicPlayer.src = selectedTrack;
-
-    // Ustawienie domyślnej głośności i przygotowanie odtwarzacza
+    backgroundMusicPlayer.src = backgroundMusicPlaylist[randomIndex];
     backgroundMusicPlayer.volume = parseFloat(musicVolumeSlider.value);
     backgroundMusicPlayer.load();
 
-    // --- Definicje funkcji pomocniczych (bez zmian) ---
+    // --- Definicje funkcji pomocniczych ---
     const stopCurrentAudio = (resetButton = true) => {
         if (voicePlayer) {
             voicePlayer.pause();
@@ -70,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const resetToFormView = () => {
         stopCurrentAudio();
+        if (typewriterInterval) clearInterval(typewriterInterval); // Zatrzymaj animację pisania
         isStoryVisible = false;
         storyContainer.classList.add('hidden');
         formSection.style.display = 'block';
@@ -80,6 +77,22 @@ document.addEventListener('DOMContentLoaded', () => {
         btnText.textContent = 'Stwórz Moją Bajkę';
     };
     
+    // ZMIANA: Funkcja do efektu maszyny do pisania
+    const typewriterEffect = (element, text, callback) => {
+        element.innerHTML = ''; // Wyczyść kontener
+        let i = 0;
+        element.style.setProperty('--cursor-opacity', '1');
+        typewriterInterval = setInterval(() => {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(typewriterInterval);
+                if (callback) callback();
+            }
+        }, 30); // Szybkość pisania w milisekundach
+    };
+
     const executeGeneration = async () => {
         const inputs = {
             childName: document.getElementById('childName').value.trim(),
@@ -88,7 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
             magicItem: document.getElementById('magicItem').value.trim(),
         };
 
-        if (Object.values(inputs).some(val => !val)) {
+        const filledInputs = Object.values(inputs).filter(Boolean);
+        if (filledInputs.length < 4) {
             alert('Proszę wypełnić wszystkie pola, by utkać opowieść!');
             return;
         }
@@ -107,12 +121,20 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const data = await response.json();
             if (data.error) throw new Error(data.error);
-
+            
+            // Przygotowanie tekstu
             const storyParts = data.story.split('\n');
             const title = storyParts.shift().replace(/[\*#]/g, '');
-            const content = storyParts.join('<br>');
+            let content = storyParts.join('<br>');
+            
+            // ZMIANA: Automatyczne pogrubianie kluczowych słów
+            filledInputs.forEach(keyword => {
+                // Używamy regex, aby uniknąć problemu z wielkością liter i słowami wewnątrz innych słów
+                const regex = new RegExp(`\\b(${keyword})\\b`, 'gi');
+                content = content.replace(regex, '<strong>$1</strong>');
+            });
+
             storyTitleEl.textContent = title;
-            storyContentEl.innerHTML = content;
 
             if (data.audioBase64) {
                 currentAudioBase64 = data.audioBase64;
@@ -120,6 +142,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 storyContainer.classList.remove('hidden');
                 isStoryVisible = true;
                 btnText.textContent = 'Stwórz Nową Opowieść';
+                
+                // ZMIANA: Uruchomienie efektu maszyny do pisania
+                storyContentEl.innerHTML = ''; // Wyczyść na wszelki wypadek
+                typewriterEffect(storyContentEl, content, () => {
+                    // Opcjonalnie: ukryj kursor po zakończeniu pisania
+                    storyContentEl.style.setProperty('--cursor-opacity', '0');
+                });
+
                 storyTitleEl.scrollIntoView({ behavior: 'smooth' });
             }
         } catch (error) {
@@ -155,21 +185,22 @@ document.addEventListener('DOMContentLoaded', () => {
         voicePlayer.addEventListener('ended', () => stopCurrentAudio(true));
     };
 
-    // --- Podpięcie Event Listenerów (bez zmian) ---
+    // --- Podpięcie Event Listenerów ---
     
+    // ZMIANA: Logika kurtyny
     enterBtn.addEventListener('click', () => {
+        entryOverlay.classList.add('open'); // Rozpocznij animację otwierania kurtyny
+        
         backgroundMusicPlayer.play().catch(e => {
-            console.error("Błąd automatycznego odtwarzania muzyki:", e);
-            alert("Twoja przeglądarka zablokowała automatyczne odtwarzanie dźwięku. Możesz włączyć go ręcznie za pomocą ikony nutki.");
+            console.warn("Automatyczne odtwarzanie muzyki zablokowane. Użytkownik musi wejść w interakcję.");
         });
         toggleMusicBtn.classList.add('is-playing');
         toggleMusicBtn.title = "Wyłącz muzykę w tle";
-        entryOverlay.classList.add('hidden');
+        
+        // Usuń nakładkę z DOM po zakończeniu animacji, aby nie blokowała interakcji
         setTimeout(() => {
-            if (entryOverlay) {
-                entryOverlay.remove();
-            }
-        }, 800);
+            entryOverlay.style.display = 'none';
+        }, 1300); // Czas musi być nieco dłuższy niż transition w CSS
     });
     
     generateBtn.addEventListener('click', () => {
