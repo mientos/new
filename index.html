@@ -11,6 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- ZMIANA: Dodajemy "kurtynę" - ekran powitalny -->
+    <div id="entry-overlay">
+        <div class="entry-content">
+            <svg class="entry-icon"><use xlink:href="#icon-sparkle"></use></svg>
+            <h1>Witaj w Teatrze Bajek</h1>
+            <p>Miejsce, gdzie rodzą się opowieści.</p>
+            <button id="enterBtn">Rozpocznij przygodę</button>
+        </div>
+    </div>
+
     <svg width="0" height="0" style="position:absolute">
         <defs>
             <symbol id="icon-sparkle" viewBox="0 0 24 24">
@@ -26,11 +36,11 @@
     </svg>
 
     <audio id="backgroundMusicPlayer" loop>
-        <!-- ZMIANA: Nowy, lepszy i słyszalny podkład muzyczny -->
-        <source src="https://cdn.pixabay.com/download/audio/2024/09/22/audio_6a4d382fe6.mp3" type="audio/mpeg">
+        <source src="https://cdn.pixabay.com/audio/2022/02/08/audio_341d3419e8.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container">
+        <!-- Reszta kodu HTML pozostaje bez zmian -->
         <header>
             <h1>
                 <svg class="header-icon"><use xlink:href="#icon-sparkle"></use></svg>
