@@ -257,7 +257,6 @@ button#generateBtn:disabled {
     height: 24px;
 }
 
-/* ZMIANA: Uniwersalna klasa dla obu suwaków głośności */
 .volume-slider {
     -webkit-appearance: none;
     appearance: none;
@@ -283,7 +282,6 @@ button#generateBtn:disabled {
     box-shadow: 0 0 10px var(--accent-starlight);
 }
 
-/* Dostosowanie szerokości dla konkretnych suwaków */
 #voiceVolume { width: 150px; }
 #musicVolume { width: 100px; }
 
@@ -300,7 +298,6 @@ footer {
     border-top: 1px solid var(--border-color);
 }
 
-/* ZMIANA: Style dla grupy kontrolek muzyki */
 #music-control-group {
     display: flex;
     align-items: center;
