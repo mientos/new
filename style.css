@@ -193,12 +193,10 @@ header p {
     font-size: 0.9rem;
 }
 
-/* NOWY STYL DLA KONTENERA Z PRZYCISKIEM WEWNĄTRZ */
 .input-with-icon {
     position: relative;
 }
 
-/* ZMODYFIKOWANE STYLE DLA INPUT I SELECT */
 .form-group input, .form-group select {
     width: 100%;
     padding: 0.9rem 1rem;
@@ -210,9 +208,9 @@ header p {
     font-size: 1rem;
     transition: all 0.3s var(--transition-curve);
 }
-/* DODAJEMY PADDING DLA INPUTÓW Z PRZYCISKIEM */
+
 .input-with-icon input {
-    padding-right: 3.5rem; /* Miejsce na przycisk */
+    padding-right: 3.5rem; 
 }
 
 
@@ -232,7 +230,6 @@ header p {
     box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.2);
 }
 
-/* NOWE STYLE DLA PRZYCISKU LOSOWANIA */
 .random-btn {
     position: absolute;
     right: 0.75rem;
@@ -350,6 +347,14 @@ button#generateBtn:disabled {
     gap: 1.5rem;
 }
 
+/* NOWE STYLE DLA KONTENERA PRZYCISKÓW */
+#story-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap; /* Na mniejszych ekranach przyciski przejdą do nowej linii */
+}
+
 .audio-button {
     background-color: transparent;
     border: 2px solid var(--accent-starlight);
@@ -360,6 +365,11 @@ button#generateBtn:disabled {
     border-radius: 10px;
     cursor: pointer;
     transition: all 0.3s var(--transition-curve);
+    position: relative; /* Potrzebne dla spinnera */
+    min-height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .audio-button:hover:not(:disabled) {
@@ -367,6 +377,15 @@ button#generateBtn:disabled {
     color: var(--bg-deep-space);
     transform: scale(1.05);
     box-shadow: 0 0 15px rgba(253, 224, 71, 0.3);
+}
+
+.audio-button:disabled {
+    border-color: var(--border-color);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    background-color: transparent;
+    transform: none;
+    box-shadow: none;
 }
 
 #volume-control-section {
