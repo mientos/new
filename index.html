@@ -16,20 +16,23 @@
             <symbol id="icon-sparkle" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M12 2.5l1.55 3.55L17.5 7.5l-3.55 1.55L12 12.5l-1.55-3.45L7 7.5l3.45-1.45L12 2.5zM6 10l-2 4.5l-4.5-2l4.5-2L6 6l2 4.5L12.5 10l-4.5 2zM18 14l-2-4.5l4.5 2l-4.5 2L18 18l-2-4.5l4.5-2z"/>
             </symbol>
-            <!-- ZMIANA: Nowa ikona głośności -->
             <symbol id="icon-volume-high" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/>
+            </symbol>
+            <!-- ZMIANA: Nowa ikona do kontroli muzyki w tle -->
+            <symbol id="icon-music" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55c-2.21 0-4 1.79-4 4s1.79 4 4 4s4-1.79 4-4V7h4V3h-6z"/>
             </symbol>
         </defs>
     </svg>
 
-    <audio id="musicPlayer" loop>
+    <!-- ZMIANA: Zmieniony id dla jasności, to jest muzyka tła -->
+    <audio id="backgroundMusicPlayer" loop>
         <source src="https://cdn.pixabay.com/audio/2022/11/22/audio_1e5929729c.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container">
         <header>
-            <!-- ZMIANA: Dodano ikonę do nagłówka dla lepszego efektu wizualnego -->
             <h1>
                 <svg class="header-icon"><use xlink:href="#icon-sparkle"></use></svg>
                 <span>Twój Teatr Bajek</span>
@@ -38,6 +41,7 @@
         </header>
 
         <main>
+            <!-- ... reszta sekcji main bez zmian ... -->
             <div id="form-section">
                 <div class="form-group">
                     <label for="childName">Imię Głównego Bohatera</label>
@@ -91,7 +95,6 @@
                         <span class="btn-text">Odsłuchaj Opowieść</span>
                     </button>
                     <div id="volume-control-section">
-                        <!-- ZMIANA: Nowa ikona SVG zamiast emoji -->
                         <label for="voiceVolume">
                             <svg><use xlink:href="#icon-volume-high"></use></svg>
                         </label>
@@ -102,6 +105,10 @@
         </main>
         <footer>
             <p>Zaprojektowane z Miłością</p>
+            <!-- ZMIANA: Przycisk do kontroli muzyki w tle -->
+            <button id="toggleMusicBtn" title="Włącz/wyłącz muzykę w tle" aria-label="Włącz lub wyłącz muzykę w tle">
+                <svg><use xlink:href="#icon-music"></use></svg>
+            </button>
         </footer>
     </div>
     <script src="script.js" defer></script>
