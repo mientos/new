@@ -5,35 +5,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const randomItems = [ 'latający dywan', 'znikająca czapka', 'magiczny kompas', 'ołówek, który rysuje prawdziwe rzeczy', 'mówiące lusterko', 'butelka z nieskończoną lemoniadą', 'klucz otwierający każde drzwi', 'świecące nasiono', 'buty pozwalające chodzić po wodzie', 'pióro piszące złotem', 'grająca muszelka', 'samomieszająca się filiżanka', 'koc, który opowiada bajki', 'latarka świecąca ciemnością', 'flet, który ożywia rośliny', 'kamień, który pokazuje wspomnienia', 'zegarek zatrzymujący czas', 'lornetka pozwalająca widzieć przyszłość', 'plecak bez dna', 'magiczna fasolka', 'czarodziejska różdżka', 'mikstura niewidzialności', 'eliksir siły', 'księga zaklęć', 'kryształowa kula', 'mapa skarbów, która mówi', 'siedmiomilowe buty', 'czapka niewidka', 'latająca miotła', 'złote jabłko', 'srebrne strzały', 'miecz, który nigdy nie chybia', 'tarcza, która wszystko odbija', 'zaczarowany flet', 'magiczna harfa', 'cudowny pierścień', 'amulet chroniący przed złem', 'talizman przynoszący szczęście', 'kryształ przewidywania', 'kamień filozoficzny', 'dywan, który czyta w myślach', 'okulary pozwalające widzieć przez ściany', 'rękawice dające super siłę', 'perfumy zmieniające nastrój', 'aparat fotografujący marzenia', 'grzebień, który prostuje kręte ścieżki', 'łyżka, która sprawia, że każda zupa jest pyszna', 'poduszka, która gwarantuje piękne sny', 'sznurowadła, które nigdy się nie rozwiązują', 'długopis, który nigdy się nie wypisuje', 'książka, której historia zmienia się za każdym razem', 'farby, które malują ruchome obrazy', 'nożyczki, które potrafią przeciąć zmartwienia', 'klej, który potrafi skleić złamane serce', 'chmura, którą można schować do kieszeni', 'gwiazda, którą można komuś podarować', 'kieszonkowa tęcza', 'słoik pełen śmiechu', 'muzyka, którą można zobaczyć', 'smak, który można usłyszeć', 'zapach, który można dotknąć', 'słowo, które leczy', 'uśmiech, który rozjaśnia mrok', 'pomysł, który zmienia świat', 'marzenie, które się spełnia', 'wspomnienie, które ogrzewa', 'nadzieja, która dodaje skrzydeł', 'miłość, która zwycięża wszystko', 'przyjaźń, która trwa wiecznie', 'odwaga, która pokonuje strach', 'mądrość, która wskazuje drogę', 'szczęście, które można znaleźć wszędzie', 'przygoda, która czeka za rogiem', 'tajemnica, którą trzeba odkryć', 'zagadka, którą trzeba rozwiązać', 'cel, który trzeba osiągnąć', 'droga, którą trzeba przejść', 'wyzwanie, któremu trzeba sprostać', 'przeszkoda, którą trzeba pokonać', 'trudność, z którą trzeba się zmierzyć' ];
     
     const SCRIPT_URL = 'https://red-band-530b.mientos90.workers.dev';
-
     const formSection = document.getElementById('form-section');
     const generateBtn = document.getElementById('generateBtn');
     const storyContainer = document.getElementById('story-container');
     const storyTitleEl = document.getElementById('storyTitle');
     const storyContentEl = document.getElementById('storyContent');
     const readAloudBtn = document.getElementById('readAloudBtn');
-    
     const backgroundMusicPlayer = document.getElementById('backgroundMusicPlayer');
     const toggleMusicBtn = document.getElementById('toggleMusicBtn');
     const voiceVolumeSlider = document.getElementById('voiceVolume');
     const musicVolumeSlider = document.getElementById('musicVolume');
-
     const btnText = generateBtn.querySelector('.btn-text');
     const spinnerContainer = generateBtn.querySelector('.spinner-container');
 
     let voicePlayer = null;
     let currentAudioBase64 = null;
     let isStoryVisible = false;
+    // ZMIANA: Dodajemy flagę, by sprawdzić, czy muzyka już została uruchomiona
+    let isMusicStarted = false;
 
-    // ZMIANA: Ustawienie głośności na podstawie wartości domyślnej suwaka
     backgroundMusicPlayer.volume = parseFloat(musicVolumeSlider.value);
+
+    // ZMIANA: Funkcja do uruchamiania muzyki, która będzie wywoływana po interakcji
+    const startMusicIfNeeded = () => {
+        if (!isMusicStarted && backgroundMusicPlayer.paused) {
+            backgroundMusicPlayer.play().catch(e => {
+                console.error("Nie udało się odtworzyć muzyki w tle. Wymagana interakcja użytkownika.", e);
+            });
+            toggleMusicBtn.classList.add('is-playing');
+            toggleMusicBtn.title = "Wyłącz muzykę w tle";
+            isMusicStarted = true;
+        }
+    };
 
     const stopCurrentAudio = (resetButton = true) => {
         if (voicePlayer) {
             voicePlayer.pause();
             voicePlayer = null;
         }
-        
         if (resetButton) {
             readAloudBtn.querySelector('.btn-text').textContent = "Odsłuchaj Opowieść";
             readAloudBtn.disabled = false;
@@ -54,17 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
         isStoryVisible = false;
         storyContainer.classList.add('hidden');
         formSection.style.display = 'block';
-        
         document.getElementById('childName').value = '';
         document.getElementById('animalHelper').value = '';
         document.getElementById('magicPlace').value = '';
         document.getElementById('magicItem').value = '';
-        
         btnText.textContent = 'Stwórz Moją Bajkę';
         btnText.classList.remove('hidden');
     };
     
     const executeGeneration = async () => {
+        // ZMIANA: Pierwsza interakcja - próbujemy włączyć muzykę
+        startMusicIfNeeded();
+
         const inputs = {
             childName: document.getElementById('childName').value.trim(),
             animalHelper: document.getElementById('animalHelper').value.trim(),
@@ -104,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 storyContainer.classList.remove('hidden');
                 isStoryVisible = true;
                 btnText.textContent = 'Stwórz Nową Opowieść';
-
                 storyTitleEl.scrollIntoView({ behavior: 'smooth' });
             }
         } catch (error) {
@@ -116,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const handleReadAloudClick = () => {
+        startMusicIfNeeded(); // Również tutaj, na wszelki wypadek
         if (voicePlayer && !voicePlayer.paused) {
             stopCurrentAudio();
             return;
@@ -124,7 +134,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const audioSrc = `data:audio/mp3;base64,${currentAudioBase64}`;
         voicePlayer = new Audio(audioSrc);
-        
         voicePlayer.volume = parseFloat(voiceVolumeSlider.value);
         
         const buttonTextEl = readAloudBtn.querySelector('.btn-text');
@@ -163,16 +172,15 @@ document.addEventListener('DOMContentLoaded', () => {
     readAloudBtn.addEventListener('click', handleReadAloudClick);
 
     toggleMusicBtn.addEventListener('click', () => {
+        // ZMIANA: Logika przycisku jest teraz prostsza
         if (backgroundMusicPlayer.paused) {
-            backgroundMusicPlayer.play().catch(e => {
-                console.error("Nie udało się odtworzyć muzyki w tle. Wymagana interakcja użytkownika.", e);
-            });
-            toggleMusicBtn.classList.add('is-playing');
-            toggleMusicBtn.title = "Wyłącz muzykę w tle";
+            startMusicIfNeeded(); // Wystarczy wywołać tę funkcję
         } else {
             backgroundMusicPlayer.pause();
             toggleMusicBtn.classList.remove('is-playing');
             toggleMusicBtn.title = "Włącz muzykę w tle";
+            // Ustawiamy flagę na false, aby kolejne kliknięcie play zadziałało
+            isMusicStarted = false; 
         }
     });
 
