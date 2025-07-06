@@ -3,12 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const randomAnimals = [ 'odważny lew', 'mądra sowa', 'szybki gepard', 'przyjazny delfin', 'śpiewający słowik', 'wierny pies', 'sprytny lis', 'wesoła wiewiórka', 'magiczny jednorożec', 'pomocny bóbr', 'leniwy kot', 'pracowita mrówka', 'dumny orzeł', 'majestatyczny wieloryb', 'miniaturowy słoń', 'latająca ryba', 'świecący w ciemności królik', 'kolorowy tukan', 'nieśmiały pancernik', 'rozgadana papuga', 'mechaniczny gołąb', 'niewidzialny chomik', 'tygrys o skrzydłach motyla', 'żółw z rakietowym napędem', 'śpiący nietoperz', 'tańczący pingwin', 'miś polarny w okularach słonecznych', 'kameleon zmieniający się w tęczę', 'śmiejąca się hiena', 'ziewający hipopotam', 'pancernik w zbroi', 'głodny pelikan', 'rozmarzony flaming', 'kret w kasku górniczym', 'dostojna żyrafa', 'szybka antylopa', 'zwinna pantera', 'puchata alpaka', 'sympatyczny kapibara', 'zaskoczona surykatka', 'śpiewający wielbłąd', 'konik polny grający na skrzypcach', 'rozważny orangutan', 'dzielna mysz polna', 'sentymentalny nosorożec', 'zazdrosny pawian', 'skaczący kangur', 'przytulna koala', 'zwinny lemur', 'szczęśliwy szczeniak', 'elegancki łabędź', 'wesoły prosiaczek', 'rozbrykany źrebak', 'pomysłowy szop pracz', 'zaciekawiony jeż', 'odważny byk', 'mądry słoń', 'spokojny żółw', 'zwinny delfin', 'król lew', 'szybki zając', 'silny niedźwiedź', 'wysoka żyrafa', 'zwinna małpa', 'puszysty królik', 'cichy jeleń', 'piękny motyl', 'pracowita pszczoła', 'groźny rekin', 'tajemniczy wilk', 'mały koliber', 'zaskakujący struś', 'kolorowa rybka', 'zwinna jaszczurka', 'śmieszna foka', 'elegancki koń', 'sympatyczna owca', 'zwinna wydra', 'zabawna świnka morska', 'dumny kogut', 'przyjazna krowa', 'sprytna wiewiórka', 'zwinny tygrys', 'mądra ośmiornica', 'piękny paw', 'zwinna gazela', 'silny goryl', 'zwinna puma', 'sympatyczny piesek preriowy', 'śliczna biedronka', 'wesoły konik morski', 'zaskakująca meduza', 'kolorowy rak', 'tajemnicza ważka', 'szybki sokół' ];
     const randomPlaces = [ 'Tęczowy Las', 'Podwodna Kraina Koralowców', 'Latająca Wyspa Chmur', 'Kryształowa Jaskinia Szeptów', 'Zaczarowany Ogród Pełen Kwiatów', 'Gwiezdna Pustynia', 'Miasto Złotych Wież', 'Dolina Zaginionych Rzek', 'Wulkan Czekolady', 'Księżycowe Jezioro', 'Wioska na Grzbiecie Olbrzyma', 'Biblioteka Zaginionych Opowieści', 'Sklep z Latającymi Dywanami', 'Fabryka Snów', 'Port Powietrznych Statków', 'Archipelag Szeptu', 'Kanion Echa', 'Pola Wiecznej Wiosny', 'Zamarznięte Królestwo Czasu', 'Labirynt z Żywopłotu', 'Wodospad Melodii', 'Ukryte Miasto w Dżungli', 'Cyrk na Końcu Świata', 'Tajemnicza Latarnia Morska', 'Opuszczona Stacja Kolejowa Duchów', 'Most z Tęczy', 'Pałac na Dnie Oceanu', 'Szczyt Najwyższej Góry Świata', 'Dolina Śpiących Smoków', 'Wioska Elfów w Koronach Drzew', 'Rynek Niewidzialnych Towarów', 'Kraina, gdzie rzeki płyną do góry', 'Pustynia, gdzie pada słodki deszcz', 'Las, w którym drzewa rozmawiają', 'Miasto zbudowane z piernika', 'Wyspa, która podróżuje po morzu', 'Jaskinia, w której ściany świecą', 'Zamek zrobiony z chmur', 'Podziemne królestwko krasnoludów', 'Akademia Magii i Czarodziejstwa', 'Kraina Zabawy Bez Końca', 'Miasteczko, gdzie czas płynie wolniej', 'Oaza Spokoju', 'Port Kosmiczny dla Statków Międzygwiezdnych', 'Planeta Cukierków', 'Mglista Dolina Tajemnic', 'Zatoka Syren', 'Kraina Wiecznego Słońca', 'Wyspa Skarbów Kapitana Brudnobrodego', 'Wioska Wikingów nad Zatoką Fiordów', 'Starożytne Ruiny w Sercu Dżungli', 'Lodowy Pałac Królowej Śniegu', 'Wielki Mur z Czekolady', 'Pole Bitwy Zabawek', 'Kraina Gigantycznych Warzyw', 'Miasto Robotów', 'Podniebne Miasteczko Ptaków', 'Wesołe Miasteczko na Księżycu', 'Kraina, gdzie wszystko jest do góry nogami', 'Las Grzybów Wielkości Domów', 'Równina Centaurów', 'Królestwo pod Górą', 'Wieża Czarodzieja', 'Zaczarowana Polana', 'Tajemniczy Staw', 'Mroczny Bór', 'Słoneczna Łąka', 'Wysokie Góry', 'Szeroka Rzeka', 'Głęboki Ocean', 'Gorąca Pustynia', 'Zimna Tundra', 'Gęsta Dżungla', 'Ciche Wzgórza', 'Kamienista Plaża', 'Tajemnicza Wyspa', 'Ukryta Dolina', 'Zaginione Miasto', 'Starożytna Świątynia', 'Opuszczony Zamek', 'Tętniące życiem miasto', 'Spokojna wioska', 'Tajemniczy ogród', 'Zaczarowany las', 'Magiczna polana', 'Latający zamek', 'Podwodny świat', 'Kosmiczna stacja', 'Inna planeta', 'Kraina baśni', 'Świat snów' ];
     const randomItems = [ 'latający dywan', 'znikająca czapka', 'magiczny kompas', 'ołówek, który rysuje prawdziwe rzeczy', 'mówiące lusterko', 'butelka z nieskończoną lemoniadą', 'klucz otwierający każde drzwi', 'świecące nasiono', 'buty pozwalające chodzić po wodzie', 'pióro piszące złotem', 'grająca muszelka', 'samomieszająca się filiżanka', 'koc, który opowiada bajki', 'latarka świecąca ciemnością', 'flet, który ożywia rośliny', 'kamień, który pokazuje wspomnienia', 'zegarek zatrzymujący czas', 'lornetka pozwalająca widzieć przyszłość', 'plecak bez dna', 'magiczna fasolka', 'czarodziejska różdżka', 'mikstura niewidzialności', 'eliksir siły', 'księga zaklęć', 'kryształowa kula', 'mapa skarbów, która mówi', 'siedmiomilowe buty', 'czapka niewidka', 'latająca miotła', 'złote jabłko', 'srebrne strzały', 'miecz, który nigdy nie chybia', 'tarcza, która wszystko odbija', 'zaczarowany flet', 'magiczna harfa', 'cudowny pierścień', 'amulet chroniący przed złem', 'talizman przynoszący szczęście', 'kryształ przewidywania', 'kamień filozoficzny', 'dywan, który czyta w myślach', 'okulary pozwalające widzieć przez ściany', 'rękawice dające super siłę', 'perfumy zmieniające nastrój', 'aparat fotografujący marzenia', 'grzebień, który prostuje kręte ścieżki', 'łyżka, która sprawia, że każda zupa jest pyszna', 'poduszka, która gwarantuje piękne sny', 'sznurowadła, które nigdy się nie rozwiązują', 'długopis, który nigdy się nie wypisuje', 'książka, której historia zmienia się za każdym razem', 'farby, które malują ruchome obrazy', 'nożyczki, które potrafią przeciąć zmartwienia', 'klej, który potrafi skleić złamane serce', 'chmura, którą można schować do kieszeni', 'gwiazda, którą można komuś podarować', 'kieszonkowa tęcza', 'słoik pełen śmiechu', 'muzyka, którą można zobaczyć', 'smak, który można usłyszeć', 'zapach, który można dotknąć', 'słowo, które leczy', 'uśmiech, który rozjaśnia mrok', 'pomysł, który zmienia świat', 'marzenie, które się spełnia', 'wspomnienie, które ogrzewa', 'nadzieja, która dodaje skrzydeł', 'miłość, która zwycięża wszystko', 'przyjaźń, która trwa wiecznie', 'odwaga, która pokonuje strach', 'mądrość, która wskazuje drogę', 'szczęście, które można znaleźć wszędzie', 'przygoda, która czeka za rogiem', 'tajemnica, którą trzeba odkryć', 'zagadka, którą trzeba rozwiązać', 'cel, który trzeba osiągnąć', 'droga, którą trzeba przejść', 'wyzwanie, któremu trzeba sprostać', 'przeszkoda, którą trzeba pokonać', 'trudność, z którą trzeba się zmierzyć' ];
-    const backgroundMusicPlaylist = [ 'https://cdn.pixabay.com/download/audio/2024/09/22/audio_6a4d382fe6.mp3', // Pozytywka
-        'https://cdn.pixabay.com/download/audio/2024/08/06/audio_81f51dde6c.mp3', // Spokojna kołysanka
-        'https://cdn.pixabay.com/download/audio/2024/12/18/audio_e07679a5ce.mp3',  // Magiczne dzwonki
-        'https://cdn.pixabay.com/download/audio/2025/04/27/audio_835501c0f8.mp3', // Pozytywka
-        'https://cdn.pixabay.com/download/audio/2025/05/09/audio_0192877465.mp3', // Spokojna kołysanka
-        'https://cdn.pixabay.com/download/audio/2025/05/09/audio_3fb7eb81be.mp3'  // Magiczne dzwonki ];
+    const backgroundMusicPlaylist = [ 'https://cdn.pixabay.com/download/audio/2022/11/17/audio_850d533c3a.mp3', 'https://cdn.pixabay.com/download/audio/2023/05/10/audio_51a117a5b3.mp3', 'https://cdn.pixabay.com/download/audio/2024/02/06/audio_c341237a77.mp3', 'https://cdn.pixabay.com/download/audio/2022/08/23/audio_86a539a2f2.mp3', 'https://cdn.pixabay.com/download/audio/2024/05/10/audio_823a07a164.mp3' ];
 
     // --- Pobranie elementów DOM ---
     const entryOverlay = document.getElementById('entry-overlay');
@@ -80,6 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
             typewriterInterval = null;
             element.innerHTML = text;
             element.style.setProperty('--cursor-opacity', '0');
+            // Usuwamy listener, ponieważ nie jest już potrzebny
             if (skipTypewriterHandler) {
                 document.removeEventListener('click', skipTypewriterHandler);
                 skipTypewriterHandler = null;
@@ -88,8 +84,10 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         skipTypewriterHandler = () => completeAnimation();
-        // Użyj { once: true }, aby listener automatycznie się usunął po pierwszym kliknięciu
-        document.addEventListener('click', skipTypewriterHandler, { once: true });
+        // Opóźnienie dodania listenera, aby uniknąć konfliktu z kliknięciem generującym
+        setTimeout(() => {
+            document.addEventListener('click', skipTypewriterHandler, { once: true });
+        }, 0);
         
         typewriterInterval = setInterval(() => {
             if (i < text.length) {
@@ -109,8 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             magicItem: document.getElementById('magicItem').value.trim(),
         };
 
-        const filledInputs = Object.values(inputs).filter(Boolean);
-        if (filledInputs.length < 4) {
+        if (Object.values(inputs).some(val => !val)) {
             alert('Proszę wypełnić wszystkie pola, by utkać opowieść!');
             return;
         }
@@ -128,16 +125,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const data = await response.json();
             if (data.error) throw new Error(data.error);
             
-            const storyParts = data.story.split('\n');
-            const title = storyParts.shift().replace(/[\*#]/g, '');
-            let content = storyParts.join('<br>');
-            
-            filledInputs.forEach(keyword => {
-                // Ucieczka znaków specjalnych dla regex
-                const escapedKeyword = keyword.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-                const regex = new RegExp(`\\b(${escapedKeyword})\\b`, 'gi');
-                content = content.replace(regex, '<strong>$1</strong>');
-            });
+            // --- NOWA, ULEPSZONA LOGIKA FORMATOWANIA TEKSTU ---
+            // 1. Wyczyść tekst z białych znaków na początku i końcu.
+            const rawStory = data.story.trim();
+            const storyParts = rawStory.split('\n');
+
+            // 2. Wyczyść tytuł.
+            const title = storyParts.shift().replace(/[\*#]/g, '').trim();
+
+            // 3. Przetwórz treść: odfiltruj puste linie, połącz z <br>, a następnie przekonwertuj Markdown.
+            let content = storyParts
+                .filter(line => line.trim() !== '') // Usuń puste linie
+                .join('<br>'); // Połącz nie-puste linie
+
+            // 4. Przekonwertuj **pogrubienie** z Markdown na <strong>tagi HTML</strong>.
+            content = content.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
             storyTitleEl.textContent = title;
 
@@ -184,8 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleMusicBtn.classList.add('is-playing');
         toggleMusicBtn.title = "Wyłącz muzykę w tle";
         
-        // Usuń nakładkę po zakończeniu animacji
-        setTimeout(() => { entryOverlay.style.display = 'none'; }, 2600); // Czas nieco dłuższy niż animacja kurtyny w CSS (2.5s)
+        setTimeout(() => { entryOverlay.style.display = 'none'; }, 2600); // Czas nieco dłuższy niż animacja kurtyny
     });
     
     generateBtn.addEventListener('click', () => { isStoryVisible ? resetToFormView() : executeGeneration(); });
