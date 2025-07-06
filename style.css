@@ -1,17 +1,17 @@
 :root {
-    --bg-deep-space: #121826;
-    --bg-card: #1d283c;
-    --accent-starlight: #FDE68A;
-    --accent-starlight-hover: #fde071;
-    --text-primary: #FFFFFF;
-    --text-secondary: #E0E0E0;
-    --text-muted: #8899B3;
+    --bg-deep-space: #0f172a; /* Ciemniejszy, głębszy granat */
+    --bg-card: #1e293b;
+    --accent-starlight: #fde047; /* Bardziej żywy żółty */
+    --accent-starlight-hover: #facc15;
+    --text-primary: #f8fafc;
+    --text-secondary: #e2e8f0;
+    --text-muted: #94a3b8;
     --border-color: #334155;
     
     --font-serif: 'Lora', serif;
     --font-sans: 'Inter', sans-serif;
     
-    --border-radius: 16px;
+    --border-radius: 20px; /* Lekko zaokrąglone rogi */
     --transition-curve: cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -21,6 +21,7 @@
     padding: 0;
 }
 
+/* ZMIANA: Magiczne, animowane tło */
 body {
     font-family: var(--font-sans);
     background-color: var(--bg-deep-space);
@@ -30,17 +31,36 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 2rem;
+    overflow: hidden; /* Zapobiega pojawianiu się pasków przewijania od tła */
+    position: relative;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(139, 92, 246, 0.15), transparent 70%),
+                radial-gradient(ellipse at 30% 70%, rgba(59, 130, 246, 0.15), transparent 70%);
+    animation: magic-glow 20s linear infinite alternate;
+    z-index: 0;
+}
+
+@keyframes magic-glow {
+    from { transform: rotate(0deg) scale(1.2); }
+    to { transform: rotate(360deg) scale(1.2); }
 }
 
 .container {
-    background-color: var(--bg-card);
+    background: linear-gradient(145deg, var(--bg-card), #172131); /* Subtelny gradient */
     padding: 2.5rem 3rem;
     border-radius: var(--border-radius);
     max-width: 600px;
     width: 100%;
     text-align: center;
     border: 1px solid var(--border-color);
-    box-shadow: 0 10px 50px -10px rgba(0,0,0,0.4);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5), 0 0 15px rgba(253, 224, 71, 0.05);
+    position: relative;
+    z-index: 1;
 }
 
 header h1 {
@@ -48,7 +68,25 @@ header h1 {
     color: var(--text-primary);
     font-size: 2.25rem;
     margin-bottom: 0.5rem;
+    /* ZMIANA: Ustawienie dla ikony w tytule */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
 }
+
+.header-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--accent-starlight);
+    animation: sparkle-anim 4s infinite;
+}
+
+@keyframes sparkle-anim {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+    50% { transform: scale(1.2) rotate(20deg); opacity: 1; }
+}
+
 
 header p {
     color: var(--text-muted);
@@ -82,13 +120,13 @@ header p {
     color: var(--text-secondary);
     font-family: var(--font-sans);
     font-size: 1rem;
-    transition: border-color 0.3s var(--transition-curve);
+    transition: all 0.3s var(--transition-curve);
 }
 
 .form-group input:focus {
     outline: none;
     border-color: var(--accent-starlight);
-    box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.2);
+    box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.2);
 }
 
 .random-btn {
@@ -115,8 +153,8 @@ header p {
 }
 
 button#generateBtn {
-    background-color: var(--accent-starlight);
-    color: var(--bg-deep-space);
+    background: linear-gradient(45deg, var(--accent-starlight), var(--accent-starlight-hover));
+    color: #3d2a00;
     border: none;
     padding: 1rem 2rem;
     font-size: 1.1rem;
@@ -128,25 +166,25 @@ button#generateBtn {
     display: flex;
     justify-content: center;
     align-items: center;
-    position: relative; /* Potrzebne dla spinnera */
-    min-height: 52px; /* Stała wysokość przycisku */
+    position: relative; 
+    min-height: 52px;
+    box-shadow: 0 4px 15px rgba(253, 224, 71, 0.1);
 }
 
 button#generateBtn:hover:not(:disabled) {
-    background-color: var(--accent-starlight-hover);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(253, 230, 138, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(253, 224, 71, 0.3);
 }
 
 button#generateBtn:disabled {
-    background-color: var(--border-color);
+    background: var(--border-color);
     color: var(--text-muted);
     cursor: not-allowed;
+    box-shadow: none;
 }
 
 .hidden { display: none !important; }
 
-/* Sekcja opowieści i kontrolek */
 #story-container {
     animation: fadeIn 1s var(--transition-curve) forwards;
 }
@@ -161,6 +199,7 @@ button#generateBtn:disabled {
     text-align: left;
     line-height: 1.8;
     color: var(--text-secondary);
+    font-size: 1.05rem; /* ZMIANA: Lepsza czytelność */
 }
 
 #storyTitle {
@@ -199,36 +238,52 @@ button#generateBtn:disabled {
     background-color: var(--accent-starlight);
     color: var(--bg-deep-space);
     transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(253, 224, 71, 0.3);
 }
 
 #volume-control-section {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+}
+#volume-control-section label {
     color: var(--text-muted);
-    font-size: 1.5rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+#volume-control-section label:hover {
+    color: var(--text-secondary);
+}
+#volume-control-section svg {
+    width: 24px;
+    height: 24px;
 }
 
+/* ZMIANA: Całkowicie nowy, magiczny styl suwaka głośności */
 input[type="range"]#voiceVolume {
     -webkit-appearance: none;
     appearance: none;
-    width: 120px;
-    height: 4px;
-    background: var(--border-color);
-    border-radius: 5px;
+    width: 150px;
+    height: 6px;
+    background: linear-gradient(90deg, var(--accent-starlight) 0%, var(--bg-deep-space) 100%);
+    border-radius: 10px;
     outline: none;
     transition: opacity 0.3s var(--transition-curve);
+    cursor: pointer;
 }
 input[type="range"]#voiceVolume::-webkit-slider-thumb {
     -webkit-appearance: none; appearance: none;
-    width: 18px; height: 18px;
-    background: var(--text-secondary);
+    width: 20px; height: 20px;
+    background: var(--text-primary);
     border-radius: 50%;
+    border: 3px solid var(--bg-card);
+    box-shadow: 0 0 5px rgba(255,255,255,0.5);
     cursor: pointer;
-    transition: background-color 0.3s var(--transition-curve);
+    transition: all 0.3s var(--transition-curve);
 }
 input[type="range"]#voiceVolume::-webkit-slider-thumb:hover {
     background: var(--accent-starlight);
+    box-shadow: 0 0 10px var(--accent-starlight);
 }
 
 footer {
@@ -238,7 +293,7 @@ footer {
     opacity: 0.6;
 }
 
-/* Stan ładowania */
+/* Spinner bez zmian, jest OK */
 .spinner-container {
     position: absolute;
     top: 50%;
