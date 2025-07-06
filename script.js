@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const backgroundMusicPlayer = document.getElementById('backgroundMusicPlayer');
     const toggleMusicBtn = document.getElementById('toggleMusicBtn');
     const voiceVolumeSlider = document.getElementById('voiceVolume');
-    // ZMIANA: Pobranie nowego suwaka głośności muzyki
     const musicVolumeSlider = document.getElementById('musicVolume');
 
     const btnText = generateBtn.querySelector('.btn-text');
@@ -26,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentAudioBase64 = null;
     let isStoryVisible = false;
 
-    // ZMIANA: Ustawienie nowej, słyszalnej głośności domyślnej
+    // ZMIANA: Ustawienie głośności na podstawie wartości domyślnej suwaka
     backgroundMusicPlayer.volume = parseFloat(musicVolumeSlider.value);
 
     const stopCurrentAudio = (resetButton = true) => {
@@ -177,7 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ZMIANA: Nowy listener do regulacji głośności muzyki w tle
     musicVolumeSlider.addEventListener('input', () => {
         backgroundMusicPlayer.volume = parseFloat(musicVolumeSlider.value);
     });
