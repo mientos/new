@@ -11,13 +11,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- ZMIANA: Struktura nakładki dostosowana do animacji kurtyny -->
     <div id="entry-overlay">
+        <div class="curtain-left"></div>
         <div class="entry-content">
             <svg class="entry-icon"><use xlink:href="#icon-sparkle"></use></svg>
             <h1>Witaj w Teatrze Bajek</h1>
             <p>Miejsce, gdzie rodzą się opowieści.</p>
             <button id="enterBtn">Rozpocznij przygodę</button>
         </div>
+        <div class="curtain-right"></div>
     </div>
 
     <svg width="0" height="0" style="position:absolute">
@@ -34,7 +37,6 @@
         </defs>
     </svg>
 
-    <!-- ZMIANA: Element audio jest teraz pusty, źródło ustawi JavaScript -->
     <audio id="backgroundMusicPlayer" loop></audio>
 
     <div class="container">
