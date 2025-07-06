@@ -21,16 +21,15 @@
     padding: 0;
 }
 
-/* ZMIANA: Ulepszone style dla ekranu powitalnego z efektem kurtyny */
 #entry-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100vh; /* Użyj vh dla pewności */
+    height: 100vh;
     z-index: 100;
     display: flex;
-    overflow: hidden; /* Ukryj to, co wychodzi poza kurtyny */
+    overflow: hidden;
 }
 
 .entry-content {
@@ -47,21 +46,21 @@
     top: 0;
     width: 50%;
     height: 100%;
-    background-color: var(--bg-deep-space);
-    /* Subtelny gradient dla wrażenia materiału */
-    background-image: linear-gradient(to right, #0f172a, #131c31);
+    /* Gradient symulujący fałdy teatralnego materiału */
+    background-image: linear-gradient(to right, #0a101f 0%, #151e33 20%, #0f172a 50%, #151e33 80%, #0a101f 100%);
     z-index: 101;
-    transition: transform 1.2s cubic-bezier(0.86, 0, 0.07, 1); /* Wolniejsza, elegancka animacja */
+    /* Dłuższa, bardziej majestatyczna animacja */
+    transition: transform 2.5s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .curtain-left {
     left: 0;
-    box-shadow: inset -5px 0 15px -5px rgba(0,0,0,0.5); /* Cień na krawędzi kurtyny */
+    box-shadow: inset -10px 0 25px -10px rgba(0,0,0,0.6);
 }
 .curtain-right {
     right: 0;
-    background-image: linear-gradient(to left, #0f172a, #131c31);
-    box-shadow: inset 5px 0 15px -5px rgba(0,0,0,0.5);
+    background-image: linear-gradient(to left, #0a101f 0%, #151e33 20%, #0f172a 50%, #151e33 80%, #0a101f 100%);
+    box-shadow: inset 10px 0 25px -10px rgba(0,0,0,0.6);
 }
 
 /* Stan "otwarty" dla kurtyny */
@@ -74,7 +73,6 @@
 #entry-overlay.open .entry-content {
     opacity: 0;
 }
-/* Koniec stylów dla kurtyny */
 
 .entry-content h1 {
     font-family: var(--font-serif);
@@ -303,7 +301,6 @@ button#generateBtn:disabled {
     padding-bottom: 1rem;
 }
 
-/* ZMIANA: Style dla efektu maszyny do pisania i podświetlania */
 #storyContent {
     position: relative;
     font-family: var(--font-sans);
@@ -315,15 +312,15 @@ button#generateBtn:disabled {
 #storyContent::after {
     content: '▋';
     position: absolute;
-    right: -10px;
-    bottom: -4px;
+    /* Użycie zmiennej CSS do kontrolowania widoczności kursora przez JS */
+    opacity: var(--cursor-opacity, 1);
     animation: blink 0.7s infinite;
     color: var(--text-muted);
 }
 @keyframes blink {
     50% { opacity: 0; }
 }
-/* Koniec zmian dla maszyny do pisania */
+
 
 #audio-section {
     margin-top: 2rem;
