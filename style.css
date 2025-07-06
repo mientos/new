@@ -1,152 +1,473 @@
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Twój Teatr Bajek AI</title>
-    <meta name="description" content="Stwórz i odsłuchaj unikalną, udźwiękowioną bajkę. Zaprojektowane, by wyciszać i inspirować.">
-    <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div id="entry-overlay">
-        <div class="curtain-left"></div>
-        <div class="entry-content">
-            <svg class="entry-icon"><use xlink:href="#icon-sparkle"></use></svg>
-            <h1>Witaj w Teatrze Bajek</h1>
-            <p>Miejsce, gdzie rodzą się opowieści.</p>
-            <button id="enterBtn">Rozpocznij przygodę</button>
-        </div>
-        <div class="curtain-right"></div>
-    </div>
-
-    <svg width="0" height="0" style="position:absolute">
-        <defs>
-            <symbol id="icon-sparkle" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M12 2.5l1.55 3.55L17.5 7.5l-3.55 1.55L12 12.5l-1.55-3.45L7 7.5l3.45-1.45L12 2.5zM6 10l-2 4.5l-4.5-2l4.5-2L6 6l2 4.5L12.5 10l-4.5 2zM18 14l-2-4.5l4.5 2l-4.5 2L18 18l-2-4.5l4.5-2z"/>
-            </symbol>
-            <symbol id="icon-volume-high" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77zM16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM3 9v6h4l5 5V4L7 9H3z"/>
-            </symbol>
-            <symbol id="icon-music" viewBox="0 0 24 24">
-                <path fill="currentColor" d="M12 3v10.55c-.59-.34-1.27-.55-2-.55c-2.21 0-4 1.79-4 4s1.79 4 4 4s4-1.79 4-4V7h4V3h-6z"/>
-            </symbol>
-        </defs>
-    </svg>
-
-    <audio id="backgroundMusicPlayer" loop></audio>
-
-    <div class="container">
-        <header>
-            <h1>
-                <svg class="header-icon"><use xlink:href="#icon-sparkle"></use></svg>
-                <span>Twój Teatr Bajek</span>
-            </h1>
-            <p>Stwórz opowieść, która utuli do snu.</p>
-        </header>
-
-        <main>
-            <div id="form-section">
-                <!-- NOWY, PRZEBUDOWANY FORMULARZ -->
-                <div class="form-group">
-                    <label for="childName">Imię Głównego Bohatera</label>
-                    <input type="text" id="childName" placeholder="np. Zosia, Krzyś">
-                </div>
-
-                <div class="form-group">
-                    <label for="motivation">Główna Motywacja Bohatera</label>
-                    <select id="motivation">
-                        <option>odnaleźć zagubioną melodię</option>
-                        <option>oddać gwiazdę, która spadła z nieba</option>
-                        <option>naprawić zepsuty zegar księżycowy</option>
-                        <option>zrozumieć, dlaczego rzeka przestała szeptać</option>
-                        <option>znaleźć lekarstwo dla chorego przyjaciela</option>
-                        <option>odkryć, co znajduje się na ostatniej stronie pustej książki</option>
-                        <option>zebrać najrzadsze kolory do namalowania wschodu słońca</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="realm">Kraina i jej Nastrój</label>
-                    <select id="realm">
-                        <option>Szeptunowy Las, gdzie drzewa znają sekrety</option>
-                        <option>Miasto Zwisających Zegarów, gdzie czas płynie inaczej</option>
-                        <option>Kryształowe Bagna, które lśnią w świetle księżyca</option>
-                        <option>Zapomniane Poddasze, gdzie kurz pamięta dawne historie</option>
-                        <option>Archipelag Latających Wysp, połączonych tęczowymi mostami</option>
-                        <option>Podziemna Biblioteka, w której książki same opowiadają historie</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="guardian">Tajemniczy Strażnik i jego Rola</label>
-                    <select id="guardian">
-                        <option>stary golem z mchu, który strzeże zapomnianych ścieżek</option>
-                        <option>chytry lis w cylindrze, który handluje zagadkami</option>
-                        <option>ostatni smok, który zamiast ogniem, zieje bańkami mydlanymi pełnymi wspomnień</option>
-                        <option>mechaniczny słowik, który zna wszystkie pieśni przeszłości i przyszłości</option>
-                        <option>nieśmiały duch studni, który mówi tylko szeptem</option>
-                        <option>niewidzialny kot, którego można dostrzec tylko po jego uśmiechu</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="storyStyle">Styl Opowieści</label>
-                    <select id="storyStyle">
-                        <option value="random" selected>Losowy (niespodzianka!)</option>
-                        <option value="disney">W stylu Disneya</option>
-                        <option value="andersen">W stylu Andersena</option>
-                        <option value="grimm">W stylu Braci Grimm</option>
-                        <option value="brzechwa_tuwim">W stylu Brzechwy/Tuwima</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="ageCategory">Dla kogo jest bajka?</label>
-                    <select id="ageCategory">
-                        <option value="dla_malucha">Dla Malucha (3-5 lat)</option>
-                        <option value="dla_starszaka" selected>Dla Starszaka (6-8 lat)</option>
-                        <option value="dla_odkrywcy">Dla Odkrywcy (9-11 lat)</option>
-                    </select>
-                </div>
-            </div>
-        
-            <button id="generateBtn">
-                <span class="btn-text">Stwórz Moją Bajkę</span>
-                <span class="spinner-container hidden"><div class="spinner"></div></span>
-            </button>
-        
-            <div id="story-container" class="hidden">
-                <div id="result">
-                    <h2 id="storyTitle"></h2>
-                    <div id="storyContent"></div>
-                </div>
+:root {
+    --bg-deep-space: #0f172a;
+    --bg-card: #1e293b;
+    --accent-starlight: #fde047;
+    --accent-starlight-hover: #facc15;
+    --text-primary: #f8fafc;
+    --text-secondary: #e2e8f0;
+    --text-muted: #94a3b8;
+    --border-color: #334155;
     
-                <div id="audio-section">
-                    <button id="readAloudBtn" class="audio-button">
-                        <span class="btn-text">Odsłuchaj Opowieść</span>
-                    </button>
-                    <div id="volume-control-section">
-                        <label for="voiceVolume">
-                            <svg><use xlink:href="#icon-volume-high"></use></svg>
-                        </label>
-                        <input type="range" id="voiceVolume" class="volume-slider" min="0" max="1" step="0.05" value="1.0">
-                    </div>
-                </div>
-            </div>
-        </main>
-        <footer>
-            <p>Zaprojektowane z Miłością</p>
-            <div id="music-control-group">
-                <button id="toggleMusicBtn" title="Włącz/wyłącz muzykę w tle" aria-label="Włącz lub wyłącz muzykę w tle">
-                    <svg><use xlink:href="#icon-music"></use></svg>
-                </button>
-                <input type="range" id="musicVolume" class="volume-slider" min="0" max="0.3" step="0.01" value="0.1" title="Głośność muzyki w tle">
-            </div>
-        </footer>
-    </div>
-    <script src="script.js" defer></script>
-</body>
-</html>
+    --font-serif: 'Lora', serif;
+    --font-sans: 'Inter', sans-serif;
+    
+    --border-radius: 20px;
+    --transition-curve: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#entry-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 100;
+    display: flex;
+    overflow: hidden;
+}
+
+.entry-content {
+    position: relative;
+    z-index: 102;
+    margin: auto;
+    text-align: center;
+    animation: fadeIn 1.5s var(--transition-curve);
+    transition: opacity 0.5s ease-out;
+}
+
+.curtain-left, .curtain-right {
+    position: absolute;
+    top: 0;
+    width: 50%;
+    height: 100%;
+    background-image: linear-gradient(to right, #0a101f 0%, #151e33 20%, #0f172a 50%, #151e33 80%, #0a101f 100%);
+    z-index: 101;
+    transition: transform 2.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.curtain-left {
+    left: 0;
+    box-shadow: inset -10px 0 25px -10px rgba(0,0,0,0.6);
+}
+.curtain-right {
+    right: 0;
+    background-image: linear-gradient(to left, #0a101f 0%, #151e33 20%, #0f172a 50%, #151e33 80%, #0a101f 100%);
+    box-shadow: inset 10px 0 25px -10px rgba(0,0,0,0.6);
+}
+
+#entry-overlay.open .curtain-left {
+    transform: translateX(-100%);
+}
+#entry-overlay.open .curtain-right {
+    transform: translateX(100%);
+}
+#entry-overlay.open .entry-content {
+    opacity: 0;
+}
+
+.entry-content h1 {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.entry-content p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+.entry-icon {
+    width: 48px;
+    height: 48px;
+    color: var(--accent-starlight);
+    margin-bottom: 1rem;
+    animation: sparkle-anim 4s infinite;
+}
+
+#enterBtn {
+    background: linear-gradient(45deg, var(--accent-starlight), var(--accent-starlight-hover));
+    color: #3d2a00;
+    border: none;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s var(--transition-curve);
+    box-shadow: 0 4px 20px rgba(253, 224, 71, 0.2);
+}
+
+#enterBtn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(253, 224, 71, 0.4);
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-deep-space);
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+    overflow-x: hidden; 
+    position: relative;
+}
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(139, 92, 246, 0.15), transparent 70%),
+                radial-gradient(ellipse at 30% 70%, rgba(59, 130, 246, 0.15), transparent 70%);
+    animation: magic-glow 20s linear infinite alternate;
+    z-index: 0;
+}
+
+@keyframes magic-glow {
+    from { transform: rotate(0deg) scale(1.2); }
+    to { transform: rotate(360deg) scale(1.2); }
+}
+
+.container {
+    background: linear-gradient(145deg, var(--bg-card), #172131);
+    padding: 2.5rem 3rem;
+    border-radius: var(--border-radius);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 60px -20px rgba(0,0,0,0.5), 0 0 15px rgba(253, 224, 71, 0.05);
+    position: relative;
+    z-index: 1;
+}
+
+header h1 {
+    font-family: var(--font-serif);
+    color: var(--text-primary);
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+.header-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--accent-starlight);
+    animation: sparkle-anim 4s infinite;
+}
+
+@keyframes sparkle-anim {
+    0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+    50% { transform: scale(1.2) rotate(20deg); opacity: 1; }
+}
+
+
+header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--bg-deep-space);
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    transition: all 0.3s var(--transition-curve);
+}
+
+.form-group select {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2394a3b8'%3E%3Cpath d='M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.5em;
+    padding-right: 3rem; 
+}
+
+.form-group input:focus, .form-group select:focus {
+    outline: none;
+    border-color: var(--accent-starlight);
+    box-shadow: 0 0 0 4px rgba(253, 224, 71, 0.2);
+}
+
+.random-btn {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.3s var(--transition-curve), transform 0.3s var(--transition-curve);
+}
+
+.random-btn:hover {
+    color: var(--accent-starlight);
+    transform: translateY(-50%) scale(1.2) rotate(15deg);
+}
+
+.random-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+button#generateBtn {
+    background: linear-gradient(45deg, var(--accent-starlight), var(--accent-starlight-hover));
+    color: #3d2a00;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s var(--transition-curve);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; 
+    min-height: 52px;
+    box-shadow: 0 4px 15px rgba(253, 224, 71, 0.1);
+}
+
+button#generateBtn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(253, 224, 71, 0.3);
+}
+
+button#generateBtn:disabled {
+    background: var(--border-color);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.hidden { display: none !important; }
+
+#story-container {
+    animation: fadeIn 1s var(--transition-curve) forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#result {
+    margin-top: 2rem;
+    text-align: left;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+}
+
+#storyTitle {
+    font-family: var(--font-serif);
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
+
+#storyContent {
+    position: relative;
+    font-family: var(--font-sans);
+}
+#storyContent strong {
+    color: var(--accent-starlight);
+    font-weight: 600;
+}
+#storyContent::after {
+    content: '▋';
+    position: absolute;
+    opacity: var(--cursor-opacity, 1);
+    animation: blink 0.7s infinite;
+    color: var(--text-muted);
+}
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+
+#audio-section {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.audio-button {
+    background-color: transparent;
+    border: 2px solid var(--accent-starlight);
+    color: var(--accent-starlight);
+    padding: 0.9rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s var(--transition-curve);
+}
+
+.audio-button:hover:not(:disabled) {
+    background-color: var(--accent-starlight);
+    color: var(--bg-deep-space);
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(253, 224, 71, 0.3);
+}
+
+#volume-control-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+#volume-control-section label {
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+#volume-control-section label:hover {
+    color: var(--text-secondary);
+}
+#volume-control-section svg {
+    width: 24px;
+    height: 24px;
+}
+
+.volume-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    background: linear-gradient(90deg, var(--accent-starlight) 0%, var(--bg-deep-space) 100%);
+    border-radius: 10px;
+    outline: none;
+    transition: opacity 0.3s var(--transition-curve);
+    cursor: pointer;
+    height: 6px;
+}
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; appearance: none;
+    width: 20px; height: 20px;
+    background: var(--text-primary);
+    border-radius: 50%;
+    border: 3px solid var(--bg-card);
+    box-shadow: 0 0 5px rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: all 0.3s var(--transition-curve);
+}
+.volume-slider::-webkit-slider-thumb:hover {
+    background: var(--accent-starlight);
+    box-shadow: 0 0 10px var(--accent-starlight);
+}
+
+#voiceVolume { width: 150px; }
+#musicVolume { width: 100px; }
+
+
+footer {
+    margin-top: 2.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    opacity: 0.8;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+#music-control-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#toggleMusicBtn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s var(--transition-curve);
+}
+
+#toggleMusicBtn:hover {
+    color: var(--text-secondary);
+    border-color: var(--text-muted);
+    transform: scale(1.1);
+}
+
+#toggleMusicBtn.is-playing {
+    color: var(--accent-starlight);
+    border-color: var(--accent-starlight);
+    box-shadow: 0 0 10px rgba(253, 224, 71, 0.2);
+}
+
+#toggleMusicBtn svg {
+    width: 20px;
+    height: 20px;
+}
+
+.spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(18, 24, 38, 0.3);
+    border-top-color: var(--bg-deep-space);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
