@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Definicja ikony SVG -->
     <svg width="0" height="0" style="position:absolute">
         <defs>
             <symbol id="icon-sparkle" viewBox="0 0 24 24">
@@ -21,7 +20,6 @@
     </svg>
 
     <audio id="musicPlayer" loop>
-        <!-- Nowy, ambientowy podkład dźwiękowy -->
         <source src="https://cdn.pixabay.com/audio/2022/11/22/audio_1e5929729c.mp3" type="audio/mpeg">
     </audio>
 
@@ -85,8 +83,9 @@
                         <span class="btn-text">Odsłuchaj Opowieść</span>
                     </button>
                     <div id="volume-control-section">
-                        <label for="musicVolume">🎶</label>
-                        <input type="range" id="musicVolume" min="0" max="1" step="0.05" value="0.1">
+                        <!-- ZMIANA: Nowa etykieta i ID suwaka -->
+                        <label for="voiceVolume">🔊</label>
+                        <input type="range" id="voiceVolume" min="0" max="1" step="0.05" value="1.0">
                     </div>
                 </div>
             </div>
