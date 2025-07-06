@@ -1,4 +1,3 @@
-/* ... cała góra pliku bez zmian ... */
 :root {
     --bg-deep-space: #0f172a; /* Ciemniejszy, głębszy granat */
     --bg-card: #1e293b;
@@ -31,7 +30,7 @@ body {
     align-items: center;
     min-height: 100vh;
     padding: 2rem;
-    overflow: hidden; 
+    overflow-x: hidden; 
     position: relative;
 }
 
@@ -284,7 +283,6 @@ input[type="range"]#voiceVolume::-webkit-slider-thumb:hover {
     box-shadow: 0 0 10px var(--accent-starlight);
 }
 
-/* ZMIANA: Style dla stopki i nowego przycisku */
 footer {
     margin-top: 2.5rem;
     font-size: 0.8rem;
@@ -328,7 +326,6 @@ footer {
     height: 20px;
 }
 
-/* Spinner bez zmian, jest OK */
 .spinner-container {
     position: absolute;
     top: 50%;
