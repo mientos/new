@@ -141,26 +141,30 @@ footer {
     transform: scale(1.2) rotate(20deg);
 }
 
-#image-section {
+/* NOWE STYLE DLA SEKCJI I PRZYCISKU AUDIO */
+#audio-section {
     margin-top: 30px;
     border-top: 2px solid var(--primary-color);
     padding-top: 20px;
 }
 
-/* OSTATECZNY STYL PRZYCISKU ILUSTRACJI */
-.image-button {
+.audio-button {
     display: block;
+    width: 100%; /* Dopasowanie do reszty przycisków */
+    box-sizing: border-box; /* Ważne przy dodawaniu paddingu i width 100% */
     background-color: var(--secondary-color);
     color: var(--white);
+    border: none;
     padding: 15px 30px;
     border-radius: var(--border-radius);
     text-decoration: none;
     font-weight: bold;
     font-size: 1.1em;
+    cursor: pointer;
     transition: all 0.3s ease;
 }
 
-.image-button:hover {
+.audio-button:hover {
     background-color: #d88e1a;
     transform: scale(1.02);
 }
