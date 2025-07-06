@@ -6,9 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ZMIANA: Playlista z muzyką w tle. Możesz tu dodawać i usuwać linki.
     const backgroundMusicPlaylist = [
-        'https://cdn.pixabay.com/audio/2022/02/08/audio_341d3419e8.mp3', // Pozytywka
-        'https://cdn.pixabay.com/audio/2024/02/09/audio_394d528f80.mp3', // Spokojna kołysanka
-        'https://cdn.pixabay.com/audio/2022/11/18/audio_894c251474.mp3'  // Magiczne dzwonki
+        'https://cdn.pixabay.com/download/audio/2024/09/22/audio_6a4d382fe6.mp3', // Pozytywka
+        'https://cdn.pixabay.com/download/audio/2024/08/06/audio_81f51dde6c.mp3', // Spokojna kołysanka
+        'https://cdn.pixabay.com/download/audio/2024/12/18/audio_e07679a5ce.mp3',  // Magiczne dzwonki
+        'https://cdn.pixabay.com/download/audio/2025/04/27/audio_835501c0f8.mp3', // Pozytywka
+        'https://cdn.pixabay.com/download/audio/2025/05/09/audio_0192877465.mp3', // Spokojna kołysanka
+        'https://cdn.pixabay.com/download/audio/2025/05/09/audio_3fb7eb81be.mp3'  // Magiczne dzwonki
     ];
 
     // --- Pobranie wszystkich elementów DOM na początku ---
