@@ -11,7 +11,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Struktura nakładki z efektem kurtyny -->
     <div id="entry-overlay">
         <div class="curtain-left"></div>
         <div class="entry-content">
@@ -50,54 +49,60 @@
 
         <main>
             <div id="form-section">
+                <!-- NOWY, PRZEBUDOWANY FORMULARZ -->
                 <div class="form-group">
                     <label for="childName">Imię Głównego Bohatera</label>
                     <input type="text" id="childName" placeholder="np. Zosia, Krzyś">
                 </div>
-            
+
                 <div class="form-group">
-                    <label for="animalHelper">Zwierzęcy Pomocnik</label>
-                    <div class="input-with-icon">
-                        <input type="text" id="animalHelper" placeholder="np. odważny lew, mądra sowa">
-                        <button class="random-btn" id="randomAnimalBtn" title="Losuj" aria-label="Losuj zwierzęcego pomocnika">
-                            <svg><use xlink:href="#icon-sparkle"></use></svg>
-                        </button>
-                    </div>
+                    <label for="motivation">Główna Motywacja Bohatera</label>
+                    <select id="motivation">
+                        <option>odnaleźć zagubioną melodię</option>
+                        <option>oddać gwiazdę, która spadła z nieba</option>
+                        <option>naprawić zepsuty zegar księżycowy</option>
+                        <option>zrozumieć, dlaczego rzeka przestała szeptać</option>
+                        <option>znaleźć lekarstwo dla chorego przyjaciela</option>
+                        <option>odkryć, co znajduje się na ostatniej stronie pustej książki</option>
+                        <option>zebrać najrzadsze kolory do namalowania wschodu słońca</option>
+                    </select>
                 </div>
-            
+
                 <div class="form-group">
-                    <label for="magicPlace">Magiczne Miejsce</label>
-                     <div class="input-with-icon">
-                        <input type="text" id="magicPlace" placeholder="np. Tęczowy Las, Podwodna Kraina">
-                        <button class="random-btn" id="randomPlaceBtn" title="Losuj" aria-label="Losuj magiczne miejsce">
-                             <svg><use xlink:href="#icon-sparkle"></use></svg>
-                        </button>
-                    </div>
+                    <label for="realm">Kraina i jej Nastrój</label>
+                    <select id="realm">
+                        <option>Szeptunowy Las, gdzie drzewa znają sekrety</option>
+                        <option>Miasto Zwisających Zegarów, gdzie czas płynie inaczej</option>
+                        <option>Kryształowe Bagna, które lśnią w świetle księżyca</option>
+                        <option>Zapomniane Poddasze, gdzie kurz pamięta dawne historie</option>
+                        <option>Archipelag Latających Wysp, połączonych tęczowymi mostami</option>
+                        <option>Podziemna Biblioteka, w której książki same opowiadają historie</option>
+                    </select>
                 </div>
-            
+
                 <div class="form-group">
-                    <label for="magicItem">Magiczny Przedmiot</label>
-                    <div class="input-with-icon">
-                        <input type="text" id="magicItem" placeholder="np. latający dywan, znikająca czapka">
-                        <button class="random-btn" id="randomItemBtn" title="Losuj" aria-label="Losuj magiczny przedmiot">
-                            <svg><use xlink:href="#icon-sparkle"></use></svg>
-                        </button>
-                    </div>
+                    <label for="guardian">Tajemniczy Strażnik i jego Rola</label>
+                    <select id="guardian">
+                        <option>stary golem z mchu, który strzeże zapomnianych ścieżek</option>
+                        <option>chytry lis w cylindrze, który handluje zagadkami</option>
+                        <option>ostatni smok, który zamiast ogniem, zieje bańkami mydlanymi pełnymi wspomnień</option>
+                        <option>mechaniczny słowik, który zna wszystkie pieśni przeszłości i przyszłości</option>
+                        <option>nieśmiały duch studni, który mówi tylko szeptem</option>
+                        <option>niewidzialny kot, którego można dostrzec tylko po jego uśmiechu</option>
+                    </select>
                 </div>
 
                 <div class="form-group">
                     <label for="storyStyle">Styl Opowieści</label>
                     <select id="storyStyle">
                         <option value="random" selected>Losowy (niespodzianka!)</option>
-                        <option value="disney">W stylu Walta Disneya</option>
-                        <option value="andersen">W stylu H.C. Andersena</option>
+                        <option value="disney">W stylu Disneya</option>
+                        <option value="andersen">W stylu Andersena</option>
                         <option value="grimm">W stylu Braci Grimm</option>
-                        <option value="brzechwa_tuwim">W stylu Brzechwy / Tuwima</option>
-                        <option value="krasicki">W stylu Ignacego Krasickiego</option>
+                        <option value="brzechwa_tuwim">W stylu Brzechwy/Tuwima</option>
                     </select>
                 </div>
                 
-                <!-- NOWY ELEMENT: KATEGORIA WIEKOWA -->
                 <div class="form-group">
                     <label for="ageCategory">Dla kogo jest bajka?</label>
                     <select id="ageCategory">
