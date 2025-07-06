@@ -62,9 +62,9 @@ const randomItems = [
     'droga, którą trzeba przejść', 'wyzwanie, któremu trzeba sprostać', 'przeszkoda, którą trzeba pokonać', 'trudność, z którą trzeba się zmierzyć'
 ];
 
-
 document.addEventListener('DOMContentLoaded', () => {
-    const SCRIPT_URL = 'https://fragrant-lake-fd3a.mientos90.workers.dev';
+    // === WAŻNE: Wstaw tutaj swój adres URL z Cloudflare! ===
+    const SCRIPT_URL = 'https://red-band-530b.mientos90.workers.dev';
 
     const generateBtn = document.getElementById('generateBtn');
     const loadingDiv = document.getElementById('loading');
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const storyTitleEl = document.getElementById('storyTitle');
     const storyContentEl = document.getElementById('storyContent');
     const imageSection = document.getElementById('image-section');
-    // POPRAWKA: Pobieramy link, a nie obrazek
+    // Pobieramy PRZYCISK-LINK, a nie obrazek
     const imageLink = document.getElementById('imageLink');
 
     const handleGenerateClick = async () => {
@@ -119,8 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
             storyContentEl.innerHTML = content;
             resultDiv.classList.remove('hidden');
 
+            // Ustawiamy atrybut `href` dla naszego PRZYCISKU-LINKU
             if (data.imageUrl) {
-                // POPRAWKA: Ustawiamy atrybut href dla linku, a nie src dla obrazka
                 imageLink.href = data.imageUrl;
                 imageSection.classList.remove('hidden');
             }
