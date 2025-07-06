@@ -26,7 +26,8 @@
     </svg>
 
     <audio id="backgroundMusicPlayer" loop>
-        <source src="https://cdn.pixabay.com/audio/2022/11/22/audio_1e5929729c.mp3" type="audio/mpeg">
+        <!-- ZMIANA: Nowy, lepszy i słyszalny podkład muzyczny -->
+        <source src="https://cdn.pixabay.com/audio/2022/10/25/audio_51310735b5.mp3" type="audio/mpeg">
     </audio>
 
     <div class="container">
@@ -102,12 +103,11 @@
         </main>
         <footer>
             <p>Zaprojektowane z Miłością</p>
-            <!-- ZMIANA: Grupa kontrolek do muzyki w tle -->
             <div id="music-control-group">
                 <button id="toggleMusicBtn" title="Włącz/wyłącz muzykę w tle" aria-label="Włącz lub wyłącz muzykę w tle">
                     <svg><use xlink:href="#icon-music"></use></svg>
                 </button>
-                <input type="range" id="musicVolume" class="volume-slider" min="0" max="0.5" step="0.02" value="0.2" title="Głośność muzyki w tle">
+                <input type="range" id="musicVolume" class="volume-slider" min="0" max="0.3" step="0.01" value="0.1" title="Głośność muzyki w tle">
             </div>
         </footer>
     </div>
