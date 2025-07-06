@@ -64,7 +64,7 @@ const randomItems = [
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    const SCRIPT_URL = 'TUTAJ_WKLEJ_SWOJ_ADRES_URL_Z_CLOUDFLARE';
+    const SCRIPT_URL = 'https://fragrant-lake-fd3a.mientos90.workers.dev';
 
     const generateBtn = document.getElementById('generateBtn');
     const loadingDiv = document.getElementById('loading');
