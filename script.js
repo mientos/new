@@ -65,7 +65,7 @@ const randomItems = [
 
 document.addEventListener('DOMContentLoaded', () => {
     // === WAŻNE: Wstaw tutaj swój adres URL z Cloudflare! ===
-    const SCRIPT_URL = 'https://red-band-530b.mientos90.workers.dev';
+    const SCRIPT_URL = 'TUTAJ_WKLEJ_SWOJ_ADRES_URL_Z_CLOUDFLARE';
 
     const generateBtn = document.getElementById('generateBtn');
     const loadingDiv = document.getElementById('loading');
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const storyTitleEl = document.getElementById('storyTitle');
     const storyContentEl = document.getElementById('storyContent');
     const imageSection = document.getElementById('image-section');
-    const generatedImage = document.getElementById('generatedImage');
+    const imageLink = document.getElementById('imageLink');
 
     const handleGenerateClick = async () => {
         const childName = document.getElementById('childName').value.trim();
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
         imageSection.classList.add('hidden');
         loadingDiv.classList.remove('hidden');
         generateBtn.disabled = true;
-        generateBtn.textContent = "Tworzę magię... To może potrwać do minuty...";
+        generateBtn.textContent = "Tworzę magię...";
 
         try {
             const payload = { childName, animalHelper, magicPlace, magicItem };
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             resultDiv.classList.remove('hidden');
 
             if (data.imageUrl) {
-                generatedImage.src = data.imageUrl;
+                imageLink.href = data.imageUrl;
                 imageSection.classList.remove('hidden');
             }
 
