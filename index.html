@@ -27,7 +27,6 @@
             <symbol id="icon-sparkle" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M12 2.5l1.55 3.55L17.5 7.5l-3.55 1.55L12 12.5l-1.55-3.45L7 7.5l3.45-1.45L12 2.5zM6 10l-2 4.5l-4.5-2l4.5-2L6 6l2 4.5L12.5 10l-4.5 2zM18 14l-2-4.5l4.5 2l-4.5 2L18 18l-2-4.5l4.5-2z"/>
             </symbol>
-            <!-- NOWA IKONA DLA PRZYCISKU LOSOWANIA -->
             <symbol id="icon-dice" viewBox="0 0 24 24">
                 <path fill="currentColor" d="M19 3H5c-1.11 0-2 .89-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.11-.9-2-2-2m-4 14h-2v-2h2v2m0-4h-2v-2h2v2m0-4h-2V7h2v2m-4 8H9v-2h2v2m-4-4H7v-2h2v2m4-4h-2V7h2v2m4-4H9V7h2v2h2V7h2v2Z"/>
             </symbol>
@@ -53,7 +52,6 @@
 
         <main>
             <div id="form-section">
-                <!-- ZMODYFIKOWANY FORMULARZ -->
                 <div class="form-group">
                     <label for="childName">Imię Głównego Bohatera</label>
                     <input type="text" id="childName" placeholder="np. Zosia, Krzyś">
@@ -100,6 +98,15 @@
                     </select>
                 </div>
                 
+                <div class="form-group">
+                    <label for="storyLength">Długość Opowieści</label>
+                    <select id="storyLength">
+                        <option value="krotka">Krótka (ok. 1-2 min czytania)</option>
+                        <option value="srednia" selected>Średnia (ok. 3-4 min czytania)</option>
+                        <option value="dluga">Długa (ok. 5-6 min czytania)</option>
+                    </select>
+                </div>
+
                 <div class="form-group">
                     <label for="ageCategory">Dla kogo jest bajka?</label>
                     <select id="ageCategory">
