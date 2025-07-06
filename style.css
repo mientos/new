@@ -1,4 +1,177 @@
-/* ... cały kod CSS pozostaje bez zmian, aż do ... */
+:root {
+    --bg-deep-space: #121826;
+    --bg-card: #1d283c;
+    --accent-starlight: #FDE68A;
+    --accent-starlight-hover: #fde071;
+    --text-primary: #FFFFFF;
+    --text-secondary: #E0E0E0;
+    --text-muted: #8899B3;
+    --border-color: #334155;
+    
+    --font-serif: 'Lora', serif;
+    --font-sans: 'Inter', sans-serif;
+    
+    --border-radius: 16px;
+    --transition-curve: cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-deep-space);
+    color: var(--text-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.container {
+    background-color: var(--bg-card);
+    padding: 2.5rem 3rem;
+    border-radius: var(--border-radius);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 50px -10px rgba(0,0,0,0.4);
+}
+
+header h1 {
+    font-family: var(--font-serif);
+    color: var(--text-primary);
+    font-size: 2.25rem;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.input-with-icon {
+    position: relative;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.9rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background-color: var(--bg-deep-space);
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    transition: border-color 0.3s var(--transition-curve);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--accent-starlight);
+    box-shadow: 0 0 0 3px rgba(253, 230, 138, 0.2);
+}
+
+.random-btn {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.3s var(--transition-curve), transform 0.3s var(--transition-curve);
+}
+
+.random-btn:hover {
+    color: var(--accent-starlight);
+    transform: translateY(-50%) scale(1.2) rotate(15deg);
+}
+
+.random-btn svg {
+    width: 20px;
+    height: 20px;
+}
+
+button#generateBtn {
+    background-color: var(--accent-starlight);
+    color: var(--bg-deep-space);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s var(--transition-curve);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Potrzebne dla spinnera */
+    min-height: 52px; /* Stała wysokość przycisku */
+}
+
+button#generateBtn:hover:not(:disabled) {
+    background-color: var(--accent-starlight-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(253, 230, 138, 0.2);
+}
+
+button#generateBtn:disabled {
+    background-color: var(--border-color);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+.hidden { display: none !important; }
+
+/* Sekcja opowieści i kontrolek */
+#story-container {
+    animation: fadeIn 1s var(--transition-curve) forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#result {
+    margin-top: 2rem;
+    text-align: left;
+    line-height: 1.8;
+    color: var(--text-secondary);
+}
+
+#storyTitle {
+    font-family: var(--font-serif);
+    text-align: center;
+    color: var(--text-primary);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+}
 
 #audio-section {
     margin-top: 2rem;
@@ -36,7 +209,6 @@
     font-size: 1.5rem;
 }
 
-/* ZMIANA: Selektor ID wskazuje teraz na 'voiceVolume' */
 input[type="range"]#voiceVolume {
     -webkit-appearance: none;
     appearance: none;
@@ -66,4 +238,22 @@ footer {
     opacity: 0.6;
 }
 
-/* ... reszta kodu CSS bez zmian ... */
+/* Stan ładowania */
+.spinner-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(18, 24, 38, 0.3);
+    border-top-color: var(--bg-deep-space);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
