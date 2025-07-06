@@ -4,14 +4,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const randomPlaces = [ 'Tęczowy Las', 'Podwodna Kraina Koralowców', 'Latająca Wyspa Chmur', 'Kryształowa Jaskinia Szeptów', 'Zaczarowany Ogród Pełen Kwiatów', 'Gwiezdna Pustynia', 'Miasto Złotych Wież', 'Dolina Zaginionych Rzek', 'Wulkan Czekolady', 'Księżycowe Jezioro', 'Wioska na Grzbiecie Olbrzyma', 'Biblioteka Zaginionych Opowieści', 'Sklep z Latającymi Dywanami', 'Fabryka Snów', 'Port Powietrznych Statków', 'Archipelag Szeptu', 'Kanion Echa', 'Pola Wiecznej Wiosny', 'Zamarznięte Królestwo Czasu', 'Labirynt z Żywopłotu', 'Wodospad Melodii', 'Ukryte Miasto w Dżungli', 'Cyrk na Końcu Świata', 'Tajemnicza Latarnia Morska', 'Opuszczona Stacja Kolejowa Duchów', 'Most z Tęczy', 'Pałac na Dnie Oceanu', 'Szczyt Najwyższej Góry Świata', 'Dolina Śpiących Smoków', 'Wioska Elfów w Koronach Drzew', 'Rynek Niewidzialnych Towarów', 'Kraina, gdzie rzeki płyną do góry', 'Pustynia, gdzie pada słodki deszcz', 'Las, w którym drzewa rozmawiają', 'Miasto zbudowane z piernika', 'Wyspa, która podróżuje po morzu', 'Jaskinia, w której ściany świecą', 'Zamek zrobiony z chmur', 'Podziemne królestwko krasnoludów', 'Akademia Magii i Czarodziejstwa', 'Kraina Zabawy Bez Końca', 'Miasteczko, gdzie czas płynie wolniej', 'Oaza Spokoju', 'Port Kosmiczny dla Statków Międzygwiezdnych', 'Planeta Cukierków', 'Mglista Dolina Tajemnic', 'Zatoka Syren', 'Kraina Wiecznego Słońca', 'Wyspa Skarbów Kapitana Brudnobrodego', 'Wioska Wikingów nad Zatoką Fiordów', 'Starożytne Ruiny w Sercu Dżungli', 'Lodowy Pałac Królowej Śniegu', 'Wielki Mur z Czekolady', 'Pole Bitwy Zabawek', 'Kraina Gigantycznych Warzyw', 'Miasto Robotów', 'Podniebne Miasteczko Ptaków', 'Wesołe Miasteczko na Księżycu', 'Kraina, gdzie wszystko jest do góry nogami', 'Las Grzybów Wielkości Domów', 'Równina Centaurów', 'Królestwo pod Górą', 'Wieża Czarodzieja', 'Zaczarowana Polana', 'Tajemniczy Staw', 'Mroczny Bór', 'Słoneczna Łąka', 'Wysokie Góry', 'Szeroka Rzeka', 'Głęboki Ocean', 'Gorąca Pustynia', 'Zimna Tundra', 'Gęsta Dżungla', 'Ciche Wzgórza', 'Kamienista Plaża', 'Tajemnicza Wyspa', 'Ukryta Dolina', 'Zaginione Miasto', 'Starożytna Świątynia', 'Opuszczony Zamek', 'Tętniące życiem miasto', 'Spokojna wioska', 'Tajemniczy ogród', 'Zaczarowany las', 'Magiczna polana', 'Latający zamek', 'Podwodny świat', 'Kosmiczna stacja', 'Inna planeta', 'Kraina baśni', 'Świat snów' ];
     const randomItems = [ 'latający dywan', 'znikająca czapka', 'magiczny kompas', 'ołówek, który rysuje prawdziwe rzeczy', 'mówiące lusterko', 'butelka z nieskończoną lemoniadą', 'klucz otwierający każde drzwi', 'świecące nasiono', 'buty pozwalające chodzić po wodzie', 'pióro piszące złotem', 'grająca muszelka', 'samomieszająca się filiżanka', 'koc, który opowiada bajki', 'latarka świecąca ciemnością', 'flet, który ożywia rośliny', 'kamień, który pokazuje wspomnienia', 'zegarek zatrzymujący czas', 'lornetka pozwalająca widzieć przyszłość', 'plecak bez dna', 'magiczna fasolka', 'czarodziejska różdżka', 'mikstura niewidzialności', 'eliksir siły', 'księga zaklęć', 'kryształowa kula', 'mapa skarbów, która mówi', 'siedmiomilowe buty', 'czapka niewidka', 'latająca miotła', 'złote jabłko', 'srebrne strzały', 'miecz, który nigdy nie chybia', 'tarcza, która wszystko odbija', 'zaczarowany flet', 'magiczna harfa', 'cudowny pierścień', 'amulet chroniący przed złem', 'talizman przynoszący szczęście', 'kryształ przewidywania', 'kamień filozoficzny', 'dywan, który czyta w myślach', 'okulary pozwalające widzieć przez ściany', 'rękawice dające super siłę', 'perfumy zmieniające nastrój', 'aparat fotografujący marzenia', 'grzebień, który prostuje kręte ścieżki', 'łyżka, która sprawia, że każda zupa jest pyszna', 'poduszka, która gwarantuje piękne sny', 'sznurowadła, które nigdy się nie rozwiązują', 'długopis, który nigdy się nie wypisuje', 'książka, której historia zmienia się za każdym razem', 'farby, które malują ruchome obrazy', 'nożyczki, które potrafią przeciąć zmartwienia', 'klej, który potrafi skleić złamane serce', 'chmura, którą można schować do kieszeni', 'gwiazda, którą można komuś podarować', 'kieszonkowa tęcza', 'słoik pełen śmiechu', 'muzyka, którą można zobaczyć', 'smak, który można usłyszeć', 'zapach, który można dotknąć', 'słowo, które leczy', 'uśmiech, który rozjaśnia mrok', 'pomysł, który zmienia świat', 'marzenie, które się spełnia', 'wspomnienie, które ogrzewa', 'nadzieja, która dodaje skrzydeł', 'miłość, która zwycięża wszystko', 'przyjaźń, która trwa wiecznie', 'odwaga, która pokonuje strach', 'mądrość, która wskazuje drogę', 'szczęście, które można znaleźć wszędzie', 'przygoda, która czeka za rogiem', 'tajemnica, którą trzeba odkryć', 'zagadka, którą trzeba rozwiązać', 'cel, który trzeba osiągnąć', 'droga, którą trzeba przejść', 'wyzwanie, któremu trzeba sprostać', 'przeszkoda, którą trzeba pokonać', 'trudność, z którą trzeba się zmierzyć' ];
     
-    // TWOJA ORYGINALNA PLAYLISTA ZOSTAŁA PRZYWRÓCONA
+    // TWOJA ORYGINALNA PLAYLISTA
     const backgroundMusicPlaylist = [
-        'https://cdn.pixabay.com/download/audio/2024/09/22/audio_6a4d382fe6.mp3', // Pozytywka
-        'https://cdn.pixabay.com/download/audio/2024/08/06/audio_81f51dde6c.mp3', // Spokojna kołysanka
-        'https://cdn.pixabay.com/download/audio/2024/12/18/audio_e07679a5ce.mp3',  // Magiczne dzwonki
-        'https://cdn.pixabay.com/download/audio/2025/04/27/audio_835501c0f8.mp3', // Pozytywka
-        'https://cdn.pixabay.com/download/audio/2025/05/09/audio_0192877465.mp3', // Spokojna kołysanka
-        'https://cdn.pixabay.com/download/audio/2025/05/09/audio_3fb7eb81be.mp3'  // Magiczne dzwonki
+        'https://cdn.pixabay.com/download/audio/2024/09/22/audio_6a4d382fe6.mp3', 
+        'https://cdn.pixabay.com/download/audio/2024/08/06/audio_81f51dde6c.mp3', 
+        'https://cdn.pixabay.com/download/audio/2024/12/18/audio_e07679a5ce.mp3',  
+        'https://cdn.pixabay.com/download/audio/2025/04/27/audio_835501c0f8.mp3', 
+        'https://cdn.pixabay.com/download/audio/2025/05/09/audio_0192877465.mp3', 
+        'https://cdn.pixabay.com/download/audio/2025/05/09/audio_3fb7eb81be.mp3'
     ];
 
     // --- Pobranie elementów DOM ---
@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const storyTitleEl = document.getElementById('storyTitle');
     const storyContentEl = document.getElementById('storyContent');
     const storyStyleSelect = document.getElementById('storyStyle');
+    const ageCategorySelect = document.getElementById('ageCategory'); // NOWY ELEMENT
     const readAloudBtn = document.getElementById('readAloudBtn');
     const backgroundMusicPlayer = document.getElementById('backgroundMusicPlayer');
     const toggleMusicBtn = document.getElementById('toggleMusicBtn');
@@ -78,7 +79,6 @@ document.addEventListener('DOMContentLoaded', () => {
         element.innerHTML = '';
         element.style.setProperty('--cursor-opacity', '1');
 
-        // Tokenizacja HTML na znaki i całe tagi
         const tokens = htmlString.match(/<[^>]+>|./g) || [];
         
         const completeAnimation = () => {
@@ -117,11 +117,12 @@ document.addEventListener('DOMContentLoaded', () => {
             animalHelper: document.getElementById('animalHelper').value.trim(),
             magicPlace: document.getElementById('magicPlace').value.trim(),
             magicItem: document.getElementById('magicItem').value.trim(),
-            style: storyStyleSelect.value
+            style: storyStyleSelect.value,
+            ageCategory: ageCategorySelect.value // NOWY WPIS
         };
 
         if (Object.values(inputs).some((val, index) => !val && index < 4)) {
-            alert('Proszę wypełnić wszystkie pola (oprócz stylu), by utkać opowieść!');
+            alert('Proszę wypełnić wszystkie pola (oprócz stylu i wieku), by utkać opowieść!');
             return;
         }
         
